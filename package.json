@@ -1,0 +1,16 @@
+{
+  "name": "zigbee2mqtt-networkmap",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^3.10.0",
+    "vue-template-compiler": "^2.6.10"
+  }
+}
