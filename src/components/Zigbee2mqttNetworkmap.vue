@@ -1,11 +1,14 @@
 <template>
-  <div>
-    <h1>My Vue Web Component</h1>
-    <div>{{ msg }}</div>
-  </div>
+    <div v-if="hass && config.entity">{{ config.entity }} is {{ hass.states[config.entity].state }}</div>
 </template>
+
 <script>
-  export default {
-    props: ['msg']
-  }
+ export default {
+     props: ['hass'],
+     data: function() {
+         return {
+             config: {}
+         }
+     }
+ }
 </script>
