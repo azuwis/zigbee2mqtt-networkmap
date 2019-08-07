@@ -24,13 +24,18 @@
              config: {},
              nodes: [],
              links: [],
-             options: {
-                 fontSize: 12,
-                 force: 3000,
+         }
+     },
+     computed: {
+         options() {
+             const config = this.config
+             return {
+                 fontSize: config.font_size || 12,
+                 force: config.force || 3000,
                  linkLabels: true,
-                 linkWidth: 2,
+                 linkWidth: config.link_width || 2,
                  nodeLabels: true,
-                 nodeSize: 12
+                 nodeSize: config.node_size || 16
              }
          }
      },
