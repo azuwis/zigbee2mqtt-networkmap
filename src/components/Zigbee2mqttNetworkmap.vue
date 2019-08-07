@@ -61,26 +61,20 @@
          },
          update() {
              const attr = this.hass.states[this.config.entity].attributes
-             const nodes = attr.nodes.map(d => {
+             this.nodes = attr.nodes.map(d => {
                  return {
                      id: d.ieeeAddr,
                      name: d.type === 'Coordinator' ? 'Coordinator' : d.friendlyName,
                      _cssClass: d.type.toLowerCase()
                  }
              })
-             if (this.nodes !== nodes) {
-                 this.nodes = nodes
-             }
-             const links = attr.links.map(d => {
+             this.links = attr.links.map(d => {
                  return {
                      sid: d.sourceIeeeAddr,
                      tid: d.targetIeeeAddr,
                      name: d.lqi
                  }
              })
-             if (this.links !== links) {
-                 this.links = links
-             }
          }
      }
  }
