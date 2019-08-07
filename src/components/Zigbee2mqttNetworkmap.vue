@@ -39,7 +39,7 @@
                  return attr.nodes.map(function(d) {
                      return {
                          id: d.ieeeAddr,
-                         name: d.friendlyName,
+                         name: d.type === 'Coordinator' ? 'Coordinator' : d.friendlyName,
                          _cssClass: d.type.toLowerCase()
                      }
                  })
