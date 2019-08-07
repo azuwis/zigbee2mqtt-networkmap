@@ -22,6 +22,8 @@
      data() {
          return {
              config: {},
+             nodes: [],
+             links: [],
              options: {
                  fontSize: 12,
                  force: 3000,
@@ -32,38 +34,48 @@
              }
          }
      },
-     computed: {
-         nodes() {
-             if (this.hass && this.config.entity) {
-                 const attr = this.hass.states[this.config.entity].attributes
-                 return attr.nodes.map(function(d) {
-                     return {
-                         id: d.ieeeAddr,
-                         name: d.type === 'Coordinator' ? 'Coordinator' : d.friendlyName,
-                         _cssClass: d.type.toLowerCase()
-                     }
-                 })
+     watch: {
+         hass(new_hass, old_hass) {
+             const entity = this.config.entity
+             if (new_hass && entity) {
+                 const new_attr = new_hass.states[entity].attributes
+                 var old_attr = null
+                 if (old_hass) {
+                     old_attr = old_hass.states[entity].attributes
+                 }
+                 if (new_attr !== old_attr) {
+                     this.update()
+                 }
              }
-             return []
-         },
-         links() {
-             if (this.hass && this.config.entity) {
-                 const attr = this.hass.states[this.config.entity].attributes
-                 return attr.links.map(function(d) {
-                     return {
-                         sid: d.sourceIeeeAddr,
-                         tid: d.targetIeeeAddr,
-                         name: d.lqi
-                     }
-                 })
-             }
-             return []
          }
      },
      methods: {
          link_cb(link) {
              link._svgAttrs = { 'marker-end': 'url(#m-end)' }
              return link
+         },
+         update() {
+             const attr = this.hass.states[this.config.entity].attributes
+             const nodes = attr.nodes.map(d => {
+                 return {
+                     id: d.ieeeAddr,
+                     name: d.type === 'Coordinator' ? 'Coordinator' : d.friendlyName,
+                     _cssClass: d.type.toLowerCase()
+                 }
+             })
+             if (this.nodes !== nodes) {
+                 this.nodes = nodes
+             }
+             const links = attr.links.map(d => {
+                 return {
+                     sid: d.sourceIeeeAddr,
+                     tid: d.targetIeeeAddr,
+                     name: d.lqi
+                 }
+             })
+             if (this.links !== links) {
+                 this.links = links
+             }
          }
      }
  }
@@ -74,10 +86,10 @@
  #m-end path {
      fill: rgba(18, 120, 98, 0.7);
  }
-.node.coordinator {
-    stroke: rgba(224, 78, 93, .7);
-}
-.node.router {
-    stroke: rgba(0, 165, 255, .7);
-}
+ .node.coordinator {
+     stroke: rgba(224, 78, 93, .7);
+ }
+ .node.router {
+     stroke: rgba(0, 165, 255, .7);
+ }
 </style>

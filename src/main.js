@@ -26,7 +26,9 @@ canvas{position:absolute;top:0;left:0}.net{height:100%;margin:0}.node{stroke:rgb
   },
   connectedCallback() {
     const ready = () => {
-      this.getVueInstance().config = this.config
+      const vm = this.getVueInstance()
+      vm.config = this.config
+      vm.update()
     }
     this.addEventListener('vce-ready', ready)
   }
