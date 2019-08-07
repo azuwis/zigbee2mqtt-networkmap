@@ -23,11 +23,12 @@
          return {
              config: {},
              options: {
+                 fontSize: 12,
                  force: 3000,
                  linkLabels: true,
                  linkWidth: 2,
                  nodeLabels: true,
-                 nodeSize: 10
+                 nodeSize: 12
              }
          }
      },
