@@ -12,6 +12,12 @@ canvas{position:absolute;top:0;left:0}.net{height:100%;margin:0}.node{stroke:rgb
 #m-end path {
     fill: rgba(18, 120, 98, 0.7);
 }
+.node.coordinator {
+    stroke: rgba(224, 78, 93, .7);
+}
+.node.router {
+    stroke: rgba(0, 165, 255, .7);
+}
 `,
   constructorCallback() {
     this.setConfig = (config) => {

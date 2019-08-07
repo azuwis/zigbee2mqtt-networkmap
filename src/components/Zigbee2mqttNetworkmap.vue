@@ -38,8 +38,9 @@
                  const attr = this.hass.states[this.config.entity].attributes
                  return attr.nodes.map(function(d) {
                      return {
+                         id: d.ieeeAddr,
                          name: d.friendlyName,
-                         id: d.ieeeAddr
+                         _cssClass: d.type.toLowerCase()
                      }
                  })
              }
@@ -73,4 +74,10 @@
  #m-end path {
      fill: rgba(18, 120, 98, 0.7);
  }
+.node.coordinator {
+    stroke: rgba(224, 78, 93, .7);
+}
+.node.router {
+    stroke: rgba(0, 165, 255, .7);
+}
 </style>
