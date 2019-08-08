@@ -51,7 +51,7 @@
                  if (old_hass) {
                      old_attr = old_hass.states[entity].attributes
                  }
-                 if (new_attr !== old_attr) {
+                 if (!isEqual(new_attr, old_attr)) {
                      this.update()
                  }
              }

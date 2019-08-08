@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@vue/cli-service": "^3.10.0",
+    "lodash.isequal": "^4.5.0",
     "vue-custom-element": "^3.2.7",
     "vue-d3-network": "^0.1.28",
     "vue-template-compiler": "^2.6.10"
