@@ -37,7 +37,8 @@
                  linkLabels: true,
                  linkWidth: config.link_width || 2,
                  nodeLabels: true,
-                 nodeSize: config.node_size || 16
+                 nodeSize: config.node_size || 16,
+                 size: Object.assign({h: 400}, config.size)
              }
          }
      },
