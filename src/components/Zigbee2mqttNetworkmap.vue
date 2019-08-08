@@ -1,5 +1,6 @@
 <template>
     <div>
+        <mwc-button @click="refresh">Refresh</mwc-button>
         <d3-network :net-nodes="nodes" :net-links="links" :options="options" :link-cb="link_cb" />
         <svg width="0" height="0">
             <defs>
@@ -58,6 +59,12 @@
          link_cb(link) {
              link._svgAttrs = { 'marker-end': 'url(#m-end)' }
              return link
+         },
+         refresh() {
+             this.hass.callService('mqtt', 'publish', {
+                 topic: 'zigbee2mqtt/bridge/networkmap',
+                 payload: 'raw'
+             })
          },
          update() {
              const attr = this.hass.states[this.config.entity].attributes
