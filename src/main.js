@@ -18,6 +18,14 @@ canvas{position:absolute;top:0;left:0}.net{height:100%;margin:0}.node{stroke:rgb
 .node.router {
     stroke: rgba(0, 165, 255, .7);
 }
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.time {
+    color: var(--secondary-text-color);
+}
 `,
   constructorCallback() {
     this.setConfig = (config) => {

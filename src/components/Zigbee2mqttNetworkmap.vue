@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <mwc-button @click="refresh">Refresh</mwc-button>
+    <ha-card>
         <d3-network :net-nodes="nodes" :net-links="links" :options="options" :link-cb="link_cb" />
         <svg width="0" height="0">
             <defs>
@@ -9,11 +8,18 @@
                 </marker>
             </defs>
         </svg>
-    </div>
+        <div class="card-actions">
+            <div class="flex">
+                <mwc-button @click="refresh">Refresh</mwc-button>
+                <div class="time">{{ state }}</div>
+            </div>
+        </div>
+    </ha-card>
 </template>
 
 <script>
  import D3Network from 'vue-d3-network'
+ import isEqual from 'lodash.isequal'
 
  export default {
      components: {
@@ -29,6 +35,14 @@
          }
      },
      computed: {
+         state() {
+             const hass = this.hass
+             const entity = this.config.entity
+             if(hass && entity) {
+                 return hass.states[entity].state
+             }
+             return ''
+         },
          options() {
              const config = this.config
              return {
