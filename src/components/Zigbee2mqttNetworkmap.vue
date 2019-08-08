@@ -62,6 +62,29 @@
              link._svgAttrs = { 'marker-end': 'url(#m-end)' }
              return link
          },
+         merge(target, source, tkey, skey, map) {
+             const store = {}
+             if (source) {
+                 source.forEach(e => {
+                     const key = skey(e)
+                     store[key] = map(e)
+                 })
+             }
+             target.forEach((e, i) => {
+                 const key = tkey(e)
+                 if (key in store) {
+                     for (const k in store[key]) {
+                         e[k] = store[key][k]
+                     }
+                     delete store[key]
+                 } else {
+                     this.$delete(target, i)
+                 }
+             })
+             for (const k in store) {
+                 target.push(store[k])
+             }
+         },
          refresh() {
              this.hass.callService('mqtt', 'publish', {
                  topic: 'zigbee2mqtt/bridge/networkmap',
@@ -74,14 +97,14 @@
                  this.initialized = true
                  this.refresh()
              }
-             this.nodes = (attr.nodes || []).map(d => {
+             this.merge(this.nodes, attr.nodes, d => d.id, d => d.ieeeAddr, d => {
                  return {
                      id: d.ieeeAddr,
                      name: d.type === 'Coordinator' ? 'Coordinator' : d.friendlyName,
                      _cssClass: d.type.toLowerCase()
                  }
              })
-             this.links = (attr.links || []).map(d => {
+             this.merge(this.links, attr.links, d => d.sid + d.tid, d => d.sourceIeeeAddr + d.targetIeeeAddr, d => {
                  return {
                      sid: d.sourceIeeeAddr,
                      tid: d.targetIeeeAddr,
