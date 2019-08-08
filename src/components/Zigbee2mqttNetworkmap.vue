@@ -32,17 +32,10 @@
              config: {},
              nodes: [],
              links: [],
+             state: ''
          }
      },
      computed: {
-         state() {
-             const hass = this.hass
-             const entity = this.config.entity
-             if(hass && entity) {
-                 return hass.states[entity].state
-             }
-             return ''
-         },
          options() {
              const config = this.config
              return {
@@ -64,6 +57,9 @@
                  var old_attr = null
                  if (old_hass) {
                      old_attr = old_hass.states[entity].attributes
+                 }
+                 if (new_attr !== old_attr) {
+                     this.state = new_hass.states[entity].state
                  }
                  if (!isEqual(new_attr, old_attr)) {
                      this.update()
@@ -100,12 +96,16 @@
              }
          },
          refresh() {
+             this.state = 'Refreshing...'
              this.hass.callService('mqtt', 'publish', {
                  topic: 'zigbee2mqtt/bridge/networkmap',
                  payload: 'raw'
              })
          },
-         update() {
+         update(update_state = false) {
+             if (update_state) {
+                 this.state = this.hass.states[this.config.entity].state
+             }
              const attr = this.hass.states[this.config.entity].attributes
              if (!attr.nodes && !this.initialized) {
                  this.initialized = true
