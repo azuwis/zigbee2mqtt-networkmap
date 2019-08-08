@@ -22,6 +22,7 @@
      props: ['hass'],
      data() {
          return {
+             initialized: false,
              config: {},
              nodes: [],
              links: [],
@@ -68,6 +69,10 @@
          },
          update() {
              const attr = this.hass.states[this.config.entity].attributes
+             if (!attr.nodes && !this.initialized) {
+                 this.initialized = true
+                 this.refresh()
+             }
              this.nodes = (attr.nodes || []).map(d => {
                  return {
                      id: d.ieeeAddr,
