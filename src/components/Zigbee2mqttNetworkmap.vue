@@ -1,20 +1,20 @@
 <template>
-    <ha-card>
-        <d3-network :net-nodes="nodes" :net-links="links" :options="options" :link-cb="link_cb" />
-        <svg width="0" height="0">
-            <defs>
-                <marker id="m-end" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth" >
-                    <path d="M0,0 L0,6 L9,3 z"></path>
-                </marker>
-            </defs>
-        </svg>
-        <div class="card-actions">
-            <div class="flex">
-                <mwc-button @click="refresh">Refresh</mwc-button>
-                <div class="time">{{ state }}</div>
-            </div>
-        </div>
-    </ha-card>
+  <ha-card>
+    <d3-network :net-nodes="nodes" :net-links="links" :options="options" :link-cb="link_cb" />
+    <svg width="0" height="0">
+      <defs>
+        <marker id="m-end" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth" >
+          <path d="M0,0 L0,6 L9,3 z"></path>
+        </marker>
+      </defs>
+    </svg>
+    <div class="card-actions">
+      <div class="flex">
+        <mwc-button @click="refresh">Refresh</mwc-button>
+        <div class="time">{{ state }}</div>
+      </div>
+    </div>
+  </ha-card>
 </template>
 
 <script>
