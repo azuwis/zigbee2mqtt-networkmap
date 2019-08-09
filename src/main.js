@@ -27,12 +27,12 @@ canvas{position:absolute;top:0;left:0}.net{height:100%;margin:0}.node{stroke:rgb
     color: var(--secondary-text-color);
 }
 `,
-  constructorCallback() {
+  constructorCallback () {
     this.setConfig = (config) => {
       this.config = config
     }
   },
-  connectedCallback() {
+  connectedCallback () {
     const ready = () => {
       const vm = this.getVueInstance()
       vm.config = this.config
@@ -40,4 +40,4 @@ canvas{position:absolute;top:0;left:0}.net{height:100%;margin:0}.node{stroke:rgb
     }
     this.addEventListener('vce-ready', ready)
   }
-});
+})
