@@ -42,11 +42,11 @@ export default {
   components: {
     D3Network
   },
-  props: ['hass'],
   data () {
     return {
       initialized: false,
       config: {},
+      hass: null,
       nodes: [],
       links: [],
       state: ''
