@@ -34,14 +34,9 @@ canvas{position:absolute;top:0;left:0}.net{height:100%;margin:0}.node{stroke:rgb
       }
     }
   },
-  connectedCallback () {
-    if (!this.ready) {
-      this.ready = () => {
-        const vm = this.getVueInstance()
-        vm.config = this.config
-        vm.update(true)
-      }
-      this.addEventListener('vce-ready', this.ready)
-    }
+  vueInstanceCreatedCallback () {
+    const vm = this.getVueInstance()
+    vm.config = this.config
+    vm.update(true)
   }
 })
