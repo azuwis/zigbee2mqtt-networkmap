@@ -119,10 +119,7 @@ export default {
         payload: 'raw'
       })
     },
-    update (updateState = false) {
-      if (updateState) {
-        this.state = this.hass.states[this.config.entity].state
-      }
+    update () {
       const attr = this.hass.states[this.config.entity].attributes
       if (!attr.nodes && !this.initialized) {
         this.initialized = true
