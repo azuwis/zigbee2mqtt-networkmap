@@ -9,5 +9,6 @@ module.exports = {
     optimization: {
       splitChunks: false
     }
-  }
+  },
+  productionSourceMap: false
 }
