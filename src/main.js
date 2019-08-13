@@ -21,12 +21,18 @@ class Zigbee2mqttNetworkmap extends Zigbee2mqttNetworkmapWrap {
 
   setConfig (config) {
     this._config = config
+    const vm = this.vueComponent
+    if (vm) {
+      vm.config = this._config
+    }
   }
 
   connectedCallback () {
     super.connectedCallback()
     const vm = this.vueComponent
-    vm.config = this._config
+    if (this._config) {
+      vm.config = this._config
+    }
     if (!vm.hass) {
       vm.hass = this._hass
     }
