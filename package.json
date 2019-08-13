@@ -11,6 +11,7 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
+    "@material/mwc-button": "^0.6.0",
     "@vue/cli-plugin-eslint": "^3.10.0",
     "@vue/cli-service": "^3.10.0",
     "@vue/eslint-config-standard": "^4.0.0",

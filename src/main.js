@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import wrap from '@vue/web-component-wrapper'
 import Zigbee2mqttNetworkmapVue from './components/Zigbee2mqttNetworkmap'
+if (process.env.NODE_ENV !== 'production') {
+  require('@material/mwc-button')
+  require('./ha-card.js')
+}
 
 Vue.component('v-style', {
   render: function (createElement) {
@@ -40,3 +44,5 @@ class Zigbee2mqttNetworkmap extends Zigbee2mqttNetworkmapWrap {
 }
 
 window.customElements.define('zigbee2mqtt-networkmap', Zigbee2mqttNetworkmap)
+
+if (process.env.NODE_ENV !== 'production') require('./demo.js')
