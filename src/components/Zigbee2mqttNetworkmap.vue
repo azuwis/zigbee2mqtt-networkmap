@@ -127,6 +127,7 @@ export default {
       if (!attr.nodes && !this.initialized) {
         this.initialized = true
         this.refresh()
+        return
       }
       this.merge(this.nodes, attr.nodes, d => d.id, d => d.ieeeAddr, d => {
         return {
