@@ -17,38 +17,33 @@ const attrs = [
   {
     'links': [
       {
-        'lqi': 4,
-        'sourceIeeeAddr': '05',
-        'targetIeeeAddr': '01'
-      },
-      {
-        'lqi': 31,
-        'sourceIeeeAddr': '03',
-        'targetIeeeAddr': '01'
-      },
-      {
-        'lqi': 69,
-        'sourceIeeeAddr': '06',
-        'targetIeeeAddr': '01'
-      },
-      {
-        'lqi': 1,
-        'sourceIeeeAddr': '07',
-        'targetIeeeAddr': '01'
-      },
-      {
-        'lqi': 35,
-        'sourceIeeeAddr': '08',
-        'targetIeeeAddr': '01'
-      },
-      {
-        'lqi': 26,
+        'lqi': 17,
         'sourceIeeeAddr': '04',
         'targetIeeeAddr': '01'
       },
       {
-        'lqi': 45,
-        'sourceIeeeAddr': '09',
+        'lqi': 69,
+        'sourceIeeeAddr': '05',
+        'targetIeeeAddr': '01'
+      },
+      {
+        'lqi': 13,
+        'sourceIeeeAddr': '06',
+        'targetIeeeAddr': '01'
+      },
+      {
+        'lqi': 35,
+        'sourceIeeeAddr': '07',
+        'targetIeeeAddr': '01'
+      },
+      {
+        'lqi': 41,
+        'sourceIeeeAddr': '01',
+        'targetIeeeAddr': '07'
+      },
+      {
+        'lqi': 26,
+        'sourceIeeeAddr': '03',
         'targetIeeeAddr': '01'
       },
       {
@@ -58,17 +53,12 @@ const attrs = [
       },
       {
         'lqi': 32,
-        'sourceIeeeAddr': '10',
+        'sourceIeeeAddr': '09',
         'targetIeeeAddr': '01'
       },
       {
         'lqi': 70,
-        'sourceIeeeAddr': '11',
-        'targetIeeeAddr': '01'
-      },
-      {
-        'lqi': 38,
-        'sourceIeeeAddr': '12',
+        'sourceIeeeAddr': '10',
         'targetIeeeAddr': '01'
       }
     ],
@@ -84,65 +74,125 @@ const attrs = [
         'type': 'EndDevice'
       },
       {
-        'friendlyName': 'button_2',
+        'friendlyName': 'temperature',
         'ieeeAddr': '03',
         'type': 'EndDevice'
       },
       {
-        'friendlyName': 'ht_bedroom',
+        'friendlyName': 'button',
         'ieeeAddr': '04',
         'type': 'EndDevice'
       },
       {
-        'friendlyName': 'button_1',
+        'friendlyName': 'motion',
         'ieeeAddr': '05',
         'type': 'EndDevice'
       },
       {
-        'friendlyName': 'motion_living_room',
+        'friendlyName': 'huminity',
         'ieeeAddr': '06',
         'type': 'EndDevice'
       },
       {
-        'friendlyName': 'ht_climate_bedroom',
-        'ieeeAddr': '07',
-        'type': 'EndDevice'
-      },
-      {
         'friendlyName': 'plug',
-        'ieeeAddr': '08',
+        'ieeeAddr': '07',
         'type': 'Router'
       },
       {
-        'friendlyName': 'motion_dining_room',
+        'friendlyName': 'door',
         'ieeeAddr': '09',
         'type': 'EndDevice'
       },
       {
-        'friendlyName': 'door_bedroom',
-        'ieeeAddr': '10',
-        'type': 'EndDevice'
-      },
-      {
         'friendlyName': 'smoke',
-        'ieeeAddr': '11',
-        'type': 'EndDevice'
-      },
-      {
-        'friendlyName': 'button_3',
-        'ieeeAddr': '12',
+        'ieeeAddr': '10',
         'type': 'EndDevice'
       }
     ]
   },
-
   {
-    'links': [],
+    'links': [
+      {
+        'lqi': 17,
+        'sourceIeeeAddr': '04',
+        'targetIeeeAddr': '01'
+      },
+      {
+        'lqi': 69,
+        'sourceIeeeAddr': '05',
+        'targetIeeeAddr': '01'
+      },
+      {
+        'lqi': 13,
+        'sourceIeeeAddr': '06',
+        'targetIeeeAddr': '01'
+      },
+      {
+        'lqi': 35,
+        'sourceIeeeAddr': '07',
+        'targetIeeeAddr': '01'
+      },
+      {
+        'lqi': 41,
+        'sourceIeeeAddr': '01',
+        'targetIeeeAddr': '07'
+      },
+      {
+        'lqi': 47,
+        'sourceIeeeAddr': '02',
+        'targetIeeeAddr': '07'
+      },
+      {
+        'lqi': 32,
+        'sourceIeeeAddr': '09',
+        'targetIeeeAddr': '01'
+      },
+      {
+        'lqi': 70,
+        'sourceIeeeAddr': '10',
+        'targetIeeeAddr': '01'
+      }
+    ],
     'nodes': [
       {
         'friendlyName': '01',
         'ieeeAddr': '01',
         'type': 'Coordinator'
+      },
+      {
+        'friendlyName': 'cube',
+        'ieeeAddr': '02',
+        'type': 'EndDevice'
+      },
+      {
+        'friendlyName': 'button',
+        'ieeeAddr': '04',
+        'type': 'EndDevice'
+      },
+      {
+        'friendlyName': 'motion',
+        'ieeeAddr': '05',
+        'type': 'EndDevice'
+      },
+      {
+        'friendlyName': 'huminity',
+        'ieeeAddr': '06',
+        'type': 'EndDevice'
+      },
+      {
+        'friendlyName': 'plug',
+        'ieeeAddr': '07',
+        'type': 'Router'
+      },
+      {
+        'friendlyName': 'door',
+        'ieeeAddr': '09',
+        'type': 'EndDevice'
+      },
+      {
+        'friendlyName': 'smoke',
+        'ieeeAddr': '10',
+        'type': 'EndDevice'
       }
     ]
   }
