@@ -92,6 +92,7 @@ export default {
       return link
     },
     merge (target, source, tkey, skey, map) {
+      const result = []
       const store = {}
       if (source) {
         source.forEach(e => {
@@ -105,14 +106,14 @@ export default {
           for (const k in store[key]) {
             e[k] = store[key][k]
           }
+          result.push(e)
           delete store[key]
-        } else {
-          this.$delete(target, i)
         }
       })
       for (const k in store) {
-        target.push(store[k])
+        result.push(store[k])
       }
+      return result
     },
     refresh () {
       this.state = 'Refreshing...'
@@ -129,14 +130,14 @@ export default {
         this.refresh()
         return
       }
-      this.merge(this.nodes, attr.nodes, d => d.id, d => d.ieeeAddr, d => {
+      this.nodes = this.merge(this.nodes, attr.nodes, d => d.id, d => d.ieeeAddr, d => {
         return {
           id: d.ieeeAddr,
           name: d.type === 'Coordinator' ? 'Coordinator' : d.friendlyName,
           _cssClass: d.type.toLowerCase()
         }
       })
-      this.merge(this.links, attr.links, d => d.sid + d.tid, d => d.sourceIeeeAddr + d.targetIeeeAddr, d => {
+      this.links = this.merge(this.links, attr.links, d => d.sid + d.tid, d => d.sourceIeeeAddr + d.targetIeeeAddr, d => {
         return {
           sid: d.sourceIeeeAddr,
           tid: d.targetIeeeAddr,
