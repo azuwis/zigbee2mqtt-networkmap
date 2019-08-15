@@ -139,6 +139,7 @@ export default {
       })
       this.links = this.merge(this.links, attr.links, d => d.sid + d.tid, d => d.sourceIeeeAddr + d.targetIeeeAddr, d => {
         return {
+          id: d.sourceIeeeAddr + d.targetIeeeAddr,
           sid: d.sourceIeeeAddr,
           tid: d.targetIeeeAddr,
           name: d.lqi
