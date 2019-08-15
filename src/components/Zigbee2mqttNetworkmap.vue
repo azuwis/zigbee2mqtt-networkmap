@@ -133,7 +133,7 @@ export default {
       this.nodes = this.merge(this.nodes, attr.nodes, d => d.id, d => d.ieeeAddr, d => {
         return {
           id: d.ieeeAddr,
-          name: d.type === 'Coordinator' ? 'Coordinator' : d.friendlyName,
+          name: d.type === 'Coordinator' ? ' ' : d.friendlyName,
           _cssClass: d.type.toLowerCase()
         }
       })
