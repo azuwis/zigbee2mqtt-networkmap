@@ -2,6 +2,10 @@
 
 [Lovelace Custom Card](https://developers.home-assistant.io/docs/en/lovelace_custom_card.html) for [Home Assistant](https://www.home-assistant.io/) to show the [Zigbee2mqtt](https://github.com/Koenkk/zigbee2mqtt/) network map with [vue-d3-network](https://github.com/emiliorizzo/vue-d3-network/).
 
+## [Demo](https://azuwis.github.io/zigbee2mqtt-networkmap/)
+
+[![Screenshot](https://azuwis.github.io/zigbee2mqtt-networkmap/screenshot.gif)](https://azuwis.github.io/zigbee2mqtt-networkmap/)
+
 ## Home Assistant setup
 
 Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.1.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
