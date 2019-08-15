@@ -4,7 +4,8 @@ module.exports = {
   },
   configureWebpack: {
     output: {
-      filename: 'zigbee2mqtt-networkmap.js'
+      chunkFilename: '[name].js',
+      filename: '[name].js'
     },
     optimization: {
       splitChunks: false
