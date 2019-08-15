@@ -3,8 +3,10 @@ module.exports = {
     extract: false
   },
   configureWebpack: {
+    entry: {
+      'zigbee2mqtt-networkmap': './src/zigbee2mqtt-networkmap.js'
+    },
     output: {
-      chunkFilename: '[name].js',
       filename: '[name].js'
     },
     optimization: {

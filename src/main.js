@@ -1,6 +1,6 @@
 import '@material/mwc-button'
 import './ha-card'
-import(/* webpackChunkName: 'zigbee2mqtt-networkmap' */ './zigbee2mqtt-networkmap').then(() => {
+customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
   function createHass () {
     function pad (str) {
       return String('00' + str).slice(-2)
