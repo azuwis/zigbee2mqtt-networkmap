@@ -61,7 +61,10 @@ yarn install
 yarn serve
 ```
 
-In `ui-lovelace.yaml`:
+And open the demo at http://localhost:8080/ using web browser.
+
+Or use Home Assistant for development, in `ui-lovelace.yaml`:
+
 ``` yaml
 resources:
   # - url: /local/zigbee2mqtt-networkmap.js
