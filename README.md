@@ -8,7 +8,7 @@
 
 ## Home Assistant setup
 
-Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.2.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
+Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.3.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
 
 In `configuration.yaml`:
 ``` yaml
@@ -29,7 +29,7 @@ and in `ui-lovelace.yaml`:
 
 ``` yaml
 resources:
-  - url: /local/zigbee2mqtt-networkmap.js?v=0.2.0
+  - url: /local/zigbee2mqtt-networkmap.js?v=0.3.0
     type: module
 
 views:
@@ -58,7 +58,7 @@ change version string in `ui-lovelace.yaml`:
 
 ``` yaml
 resources:
-  - url: /local/zigbee2mqtt-networkmap.js?v=0.2.0 # change `v=0.1.0` to `v=0.2.0`
+  - url: /local/zigbee2mqtt-networkmap.js?v=0.3.0 # change `v=0.2.0` to `v=0.3.0`
     type: module
 ```
 
