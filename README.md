@@ -34,7 +34,7 @@ resources:
 
 views:
   - title: Zigbee Network
-    panel: true # this renders the first card on full width, other cards in this view will not be rendered.
+    panel: true # this renders the first card on full width, other cards in this view will not be rendered
     cards:
       - type: custom:zigbee2mqtt-networkmap
         entity: sensor.zigbee2mqtt_networkmap
@@ -63,6 +63,20 @@ resources:
 ```
 
 And then refresh the browser.
+
+## Changelog
+
+#### [0.3.0] - 2019-08-22
+
+Filter all dead links.
+
+#### [0.2.0] - 2019-08-22
+
+Filter links with address 0x0000000000000000.
+
+#### [0.1.0] - 2019-08-15
+
+Initial release.
 
 ## Development
 
