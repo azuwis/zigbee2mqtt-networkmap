@@ -137,10 +137,12 @@ export default {
           _cssClass: d.type.toLowerCase()
         }
       })
+      const nodes = attr.nodes.map(e => e.ieeeAddr)
       this.links = this.merge(
         this.links,
         attr.links.filter(
-          e => e.sourceIeeeAddr !== '0x0000000000000000' && e.targetIeeeAddr !== '0x0000000000000000'
+          e => nodes.includes(e.sourceIeeeAddr) &&
+             nodes.includes(e.targetIeeeAddr)
         ),
         d => d.sid + d.tid,
         d => d.sourceIeeeAddr + d.targetIeeeAddr,
