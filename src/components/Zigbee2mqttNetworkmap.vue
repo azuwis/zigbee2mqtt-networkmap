@@ -137,14 +137,21 @@ export default {
           _cssClass: d.type.toLowerCase()
         }
       })
-      this.links = this.merge(this.links, attr.links, d => d.sid + d.tid, d => d.sourceIeeeAddr + d.targetIeeeAddr, d => {
-        return {
-          id: d.sourceIeeeAddr + d.targetIeeeAddr,
-          sid: d.sourceIeeeAddr,
-          tid: d.targetIeeeAddr,
-          name: d.lqi
-        }
-      })
+      this.links = this.merge(
+        this.links,
+        attr.links.filter(
+          e => e.sourceIeeeAddr !== '0x0000000000000000' && e.targetIeeeAddr !== '0x0000000000000000'
+        ),
+        d => d.sid + d.tid,
+        d => d.sourceIeeeAddr + d.targetIeeeAddr,
+        d => {
+          return {
+            id: d.sourceIeeeAddr + d.targetIeeeAddr,
+            sid: d.sourceIeeeAddr,
+            tid: d.targetIeeeAddr,
+            name: d.lqi
+          }
+        })
     }
   }
 }
