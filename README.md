@@ -8,7 +8,7 @@
 
 ## Home Assistant setup
 
-Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.3.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
+Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.4.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
 
 In `configuration.yaml`:
 ``` yaml
@@ -29,7 +29,7 @@ and in `ui-lovelace.yaml`:
 
 ``` yaml
 resources:
-  - url: /local/zigbee2mqtt-networkmap.js?v=0.3.0
+  - url: /local/zigbee2mqtt-networkmap.js?v=0.4.0
     type: module
 
 views:
@@ -58,13 +58,17 @@ change version string in `ui-lovelace.yaml`:
 
 ``` yaml
 resources:
-  - url: /local/zigbee2mqtt-networkmap.js?v=0.3.0 # change `v=0.2.0` to `v=0.3.0`
+  - url: /local/zigbee2mqtt-networkmap.js?v=0.4.0 # change `v=0.3.0` to `v=0.4.0`
     type: module
 ```
 
 And then refresh the browser.
 
 ## Changelog
+
+#### [0.4.0] - 2019-08-23
+
+Workaround empty map problem in Firefox.
 
 #### [0.3.0] - 2019-08-22
 
