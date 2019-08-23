@@ -17,7 +17,7 @@
        align-items: center;
      }
     </v-style>
-    <d3-network :net-nodes="nodes" :net-links="links" :options="options" :link-cb="link_cb" />
+    <d3-network :net-nodes="nodes" :net-links="links" :options="options" :link-cb="link_cb" ref="net" />
     <svg width="0" height="0">
       <defs>
         <marker id="m-end" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth" >
@@ -63,7 +63,8 @@ export default {
         nodeLabels: true,
         nodeSize: config.node_size || 16,
         size: {
-          h: config.height || 400
+          h: config.height || 400,
+          w: config.width || undefined
         }
       }
     }
@@ -155,6 +156,13 @@ export default {
           }
         })
     }
+  },
+  mounted () {
+    setTimeout(() => {
+      if (!this.options.size.w) {
+        this.$refs.net.onResize()
+      }
+    }, 100)
   }
 }
 </script>
