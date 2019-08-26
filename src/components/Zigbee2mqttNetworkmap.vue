@@ -20,8 +20,8 @@
     <d3-network :net-nodes="nodes" :net-links="links" :options="options" :link-cb="link_cb" ref="net" />
     <svg width="0" height="0">
       <defs>
-        <marker id="m-end" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth" >
-          <path d="M0,0 L0,6 L9,3 z"></path>
+        <marker id="m-end" markerWidth="10" markerHeight="10" refX="12" refY="2" orient="auto" markerUnits="strokeWidth" >
+          <path d="M0,0 L0,4 L8,2 z"></path>
         </marker>
       </defs>
     </svg>
