@@ -61,11 +61,7 @@ export default {
         linkLabels: true,
         linkWidth: config.link_width || 2,
         nodeLabels: true,
-        nodeSize: config.node_size || 16,
-        size: {
-          h: config.height || 400,
-          w: config.width || undefined
-        }
+        nodeSize: config.node_size || 16
       }
     }
   },
@@ -84,6 +80,11 @@ export default {
         if (!isEqual(newAttr, oldAttr)) {
           this.update()
         }
+      }
+    },
+    config (newConfig, oldConfig) {
+      if (newConfig) {
+        this.$refs.net.size.h = newConfig.height || 400
       }
     }
   },
@@ -159,9 +160,7 @@ export default {
   },
   mounted () {
     setTimeout(() => {
-      if (!this.options.size.w) {
-        this.$refs.net.onResize()
-      }
+      this.$refs.net.onResize()
     }, 100)
   }
 }
