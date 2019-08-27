@@ -56,6 +56,7 @@
         justify-content: space-between;
         align-items: center;
       }
+      {{ css }}
     </v-style>
     <d3-network :net-nodes="nodes" :net-links="links" :options="options" :link-cb="link_cb" ref="net" />
     <svg width="0" height="0">
@@ -103,6 +104,9 @@ export default {
         nodeLabels: true,
         nodeSize: config.node_size || 16
       }
+    },
+    css () {
+      return this.config.css || ''
     }
   },
   watch: {
