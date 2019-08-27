@@ -222,7 +222,27 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
   const net = document.querySelector('zigbee2mqtt-networkmap')
   net.setConfig({
     type: 'custom:zigbee2mqtt-networkmap',
-    entity: 'sensor.zigbee2mqtt_networkmap'
+    entity: 'sensor.zigbee2mqtt_networkmap',
+    mqtt_base_topic: 'zigbee2mqtt',
+    force: 3000,
+    node_size: 16,
+    font_size: 12,
+    link_width: 2,
+    height: 400,
+    css: `
+:host {
+  --zigbee2mqtt-networkmap-node-color: rgba(18, 120, 98, .7);
+  --zigbee2mqtt-networkmap-node-fill-color: #dcfaf3;
+  --zigbee2mqtt-networkmap-node-pinned-color: rgba(190, 56, 93, .6);
+  --zigbee2mqtt-networkmap-link-color: rgba(18, 120, 98, .5);
+  --zigbee2mqtt-networkmap-hover-color: #be385d;
+  --zigbee2mqtt-networkmap-link-selected-color: rgba(202, 164, 85, .6);
+  --zigbee2mqtt-networkmap-label-color: #127862;
+  --zigbee2mqtt-networkmap-arrow-color: rgba(18, 120, 98, 0.7);
+  --zigbee2mqtt-networkmap-node-coordinator-color: rgba(224, 78, 93, .7);
+  --zigbee2mqtt-networkmap-node-router-color: rgba(0, 165, 255, .7);
+}
+`
   })
   net.hass = createHass()
 })
