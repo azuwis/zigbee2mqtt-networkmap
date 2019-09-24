@@ -17,8 +17,8 @@ If applicable, add screenshots to help explain your problem.
 On Home Assistant, go to `Menu` -> `Developer Tools` -> `INFO`
 
 **Zigbee2mqtt version**
-Check `zigbee2mqtt/package.json` file, e.g. `"version": "1.5.1"`.
-Please update Zigbee2mqtt to version 1.5.1 or later and try again if not already done.
+Check `zigbee2mqtt/package.json` file, e.g. `"version": "1.5.1"`. Please update
+Zigbee2mqtt to version 1.5.1 or later and try again if not already done.
 
 **OS and browser version**
  e.g. Debian 10 Firefox 68, Windows 10 Chrome 76
@@ -30,9 +30,17 @@ and copy error message here if any.
 ```
 
 **State attributes of `sensor.zigbee2mqtt_networkmap`**
-On Home Assistant, go to `Menu` -> `Developer tools` -> `STATES` -> `sensor.zigbee2mqtt_networkmap`, 
+On Home Assistant, go to `Menu` -> `Developer tools` -> `STATES` ->
+`sensor.zigbee2mqtt_networkmap` -> Click the link and scroll up, find `State
+attributes (JSON, optional)`,
 ```
-and copy state attributes here.
+and copy the text here, screenshot won't help.
+```
+
+**Home Assistant log**
+Check `<config-directory>/home-assistant.log`,
+```
+and copy related log here.
 ```
 
 **Additional context**
