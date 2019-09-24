@@ -8,6 +8,8 @@
 
 ## Home Assistant setup
 
+Update Zigbee2mqtt to version 1.5.1 or later, earlier version may not work.
+
 Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.5.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
 
 In `configuration.yaml`:
