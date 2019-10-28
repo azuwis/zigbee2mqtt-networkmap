@@ -40,11 +40,7 @@ views:
     cards:
       - type: custom:zigbee2mqtt-networkmap
         entity: sensor.zigbee2mqtt_networkmap
-```
-
-Full card default options:
-
-``` yaml
+        # the following are optional:
         mqtt_base_topic: zigbee2mqtt # if you change base_topic of Zigbee2mqtt, change it accordingly
         force: 3000 # decrease it to get smaller map if you have many devices
         node_size: 16
