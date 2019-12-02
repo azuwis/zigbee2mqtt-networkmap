@@ -81,7 +81,7 @@ And then refresh the browser.
 
 #### [0.6.0] - 2019-12-02
 
-* Fixed TypeError if device type is not available
+* Fixed TypeError if device type is not available, thank @ChrisScheffler
 * Support [HACS](https://hacs.xyz/)
 
 #### [0.5.0] - 2019-08-27
