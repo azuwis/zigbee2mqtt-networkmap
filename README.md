@@ -10,7 +10,7 @@
 
 Update Zigbee2mqtt to version 1.5.1 or later, earlier version may not work.
 
-Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.5.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
+Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.6.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
 
 In `configuration.yaml`:
 ``` yaml
@@ -31,7 +31,7 @@ and in `ui-lovelace.yaml`:
 
 ``` yaml
 resources:
-  - url: /local/zigbee2mqtt-networkmap.js?v=0.5.0
+  - url: /local/zigbee2mqtt-networkmap.js?v=0.6.0
     type: module
 
 views:
@@ -71,13 +71,18 @@ change version string in `ui-lovelace.yaml`:
 
 ``` yaml
 resources:
-  - url: /local/zigbee2mqtt-networkmap.js?v=0.5.0 # change `v=0.4.0` to `v=0.5.0`
+  - url: /local/zigbee2mqtt-networkmap.js?v=0.6.0 # change `v=0.5.0` to `v=0.6.0`
     type: module
 ```
 
 And then refresh the browser.
 
 ## Changelog
+
+#### [0.6.0] - 2019-12-02
+
+* Fixed TypeError if device type is not available
+* Support [HACS](https://hacs.xyz/)
 
 #### [0.5.0] - 2019-08-27
 
