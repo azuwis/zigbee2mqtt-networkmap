@@ -180,7 +180,7 @@ export default {
         return {
           id: d.ieeeAddr,
           name: d.type === 'Coordinator' ? ' ' : d.friendlyName,
-          _cssClass: d.type.toLowerCase()
+          _cssClass: d.type ? d.type.toLowerCase() : ''
         }
       })
       const nodes = attr.nodes.map(e => e.ieeeAddr)
