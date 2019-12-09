@@ -77,6 +77,19 @@ resources:
 
 And then refresh the browser.
 
+## FAQ
+
+Q: How can I customize device names in the map?
+
+A: The names showed in the map are given by Zigbee2mqtt, you need to configure
+Zigbee2mqtt to customize them, see
+https://www.zigbee2mqtt.io/information/configuration.html for the
+`friendly_name` option.
+
+Additionaly, HomeAssistant will automatically use the same names when MQTT auto
+discovery is enabled, see
+https://www.zigbee2mqtt.io/integration/home_assistant.html
+
 ## Changelog
 
 #### [0.6.0] - 2019-12-02
