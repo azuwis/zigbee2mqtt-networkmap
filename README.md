@@ -77,6 +77,8 @@ resources:
 
 ```
 
+The `views:` setup will be identical to the non HACS install.
+
 
 ## Upgrade
 
