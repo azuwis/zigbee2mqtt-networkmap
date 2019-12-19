@@ -64,6 +64,20 @@ views:
           }
 ```
 
+### HACS install
+
+When installing the plugin via [HACS](https://community.home-assistant.io/t/custom-component-hacs/121727),  the path that the JS asset must be loaded from will be slighlty different. Your `ui-lovelace.yaml` config will look like this:
+
+```
+resources:
+  # Note: the `community_plugin` root and `type` is `module`. Also, no `?v=` query string as HACS
+  #   will make sure that the most recent version is always loaded.
+  - url: /community_plugin/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js
+    type: module
+
+```
+
+
 ## Upgrade
 
 Replace `<config-directory>/www/zigbee2mqtt-networkmap.js` with new one, and
