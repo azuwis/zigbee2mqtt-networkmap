@@ -106,6 +106,11 @@ Additionaly, HomeAssistant will automatically use the same names when MQTT auto
 discovery is enabled, see
 https://www.zigbee2mqtt.io/integration/home_assistant.html
 
+Q: Some of my devices are detached.
+
+A: This is probably a Zigbee2mqtt issue, see
+https://github.com/Koenkk/zigbee2mqtt/issues/2436 for discussion.
+
 ## Changelog
 
 #### [0.6.0] - 2019-12-02
