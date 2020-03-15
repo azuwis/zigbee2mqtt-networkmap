@@ -10,7 +10,7 @@
 
 Update Zigbee2mqtt to version 1.5.1 or later, earlier version may not work.
 
-Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.6.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
+### Backend setup
 
 In `configuration.yaml`:
 ``` yaml
@@ -25,6 +25,10 @@ sensor:
     json_attributes_topic: zigbee2mqtt/bridge/networkmap/raw
 
 ```
+
+### Frontend setup (manual)
+
+Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.6.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
 
 Enable [Lovelace YAML mode](https://www.home-assistant.io/lovelace/yaml-mode/),
 and in `ui-lovelace.yaml`:
@@ -64,7 +68,7 @@ views:
           }
 ```
 
-### HACS install
+### Frontend setup (HACS)
 
 When installing the plugin via [HACS](https://community.home-assistant.io/t/custom-component-hacs/121727),  the path that the JS asset must be loaded from will be slighlty different. Your `ui-lovelace.yaml` config will look like this:
 
@@ -78,7 +82,6 @@ resources:
 ```
 
 The `views:` setup will be identical to the non HACS install.
-
 
 ## Upgrade
 
