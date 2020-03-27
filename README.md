@@ -10,6 +10,10 @@
 
 Update Zigbee2mqtt to version 1.5.1 or later, earlier version may not work.
 
+This instruction is for Home Assistant 0.107 and later.
+
+For 0.106 and earlier instruction can be found [here](https://github.com/azuwis/zigbee2mqtt-networkmap/tree/e6ea1b5fcf680372446ad11e968f429f8f8c1c18).
+
 ### Backend setup
 
 In `configuration.yaml`:
@@ -30,14 +34,22 @@ sensor:
 
 Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.6.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
 
-Enable [Lovelace YAML mode](https://www.home-assistant.io/lovelace/yaml-mode/),
-and in `ui-lovelace.yaml`:
+Enable [Lovelace YAML mode](https://www.home-assistant.io/lovelace/yaml-mode/).
+
+In `configuration.yaml`:
 
 ``` yaml
-resources:
-  - url: /local/zigbee2mqtt-networkmap.js?v=0.6.0
-    type: module
+lovelace:
+  mode: yaml
+  resources:
+    - url: /local/zigbee2mqtt-networkmap.js?v=0.6.0
+      type: module
 
+```
+
+In `ui-lovelace.yaml`:
+
+``` yaml
 views:
   - title: Zigbee Network
     panel: true # this renders the first card on full width, other cards in this view will not be rendered
@@ -86,7 +98,7 @@ The `views:` setup will be identical to the non HACS install.
 ## Upgrade
 
 Replace `<config-directory>/www/zigbee2mqtt-networkmap.js` with new one, and
-change version string in `ui-lovelace.yaml`:
+change version string in `configuration.yaml`:
 
 ``` yaml
 resources:
@@ -163,7 +175,7 @@ yarn serve
 
 And open the demo at http://localhost:8080/ using web browser.
 
-Or use Home Assistant for development, in `ui-lovelace.yaml`:
+Or use Home Assistant for development, in `configuration.yaml`:
 
 ``` yaml
 resources:
