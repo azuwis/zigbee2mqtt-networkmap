@@ -88,7 +88,7 @@ When installing the plugin via [HACS](https://community.home-assistant.io/t/cust
 resources:
   # Note: the `community_plugin` root and `type` is `module`. Also, no `?v=` query string as HACS
   #   will make sure that the most recent version is always loaded.
-  - url: /hacsfile/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js
+  - url: /hacsfiles/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js
     type: module
 
 ```
