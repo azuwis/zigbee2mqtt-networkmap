@@ -8,7 +8,7 @@
 
 ## Home Assistant setup
 
-Update Zigbee2mqtt to version 1.5.1 or later, earlier version may not work.
+Update Zigbee2mqtt to version 1.17.0 or later, earlier version may not work.
 
 This instruction is for Home Assistant 0.107 and later.
 
@@ -22,12 +22,12 @@ sensor:
   - platform: mqtt
     name: Zigbee2mqtt Networkmap
     # if you change base_topic of Zigbee2mqtt, change state_topic accordingly
-    state_topic: zigbee2mqtt/bridge/networkmap/raw
+    state_topic: zigbee2mqtt/bridge/response/networkmap
     value_template: >-
       {{ now().strftime('%Y-%m-%d %H:%M:%S') }}
     # again, if you change base_topic of Zigbee2mqtt, change json_attributes_topic accordingly
-    json_attributes_topic: zigbee2mqtt/bridge/networkmap/raw
-
+    json_attributes_topic: zigbee2mqtt/bridge/response/networkmap
+    json_attributes_template: "{{ value_json.data.value | tojson }}"
 ```
 
 ### Frontend setup (manual)
