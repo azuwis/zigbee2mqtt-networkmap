@@ -165,8 +165,8 @@ export default {
       this.state = 'Refreshing...'
       const mqttBaseTopic = this.config.mqtt_base_topic || 'zigbee2mqtt'
       this.hass.callService('mqtt', 'publish', {
-        topic: mqttBaseTopic + '/bridge/networkmap',
-        payload: 'raw'
+        topic: mqttBaseTopic + '/bridge/request/networkmap',
+        payload: JSON.stringify({type: 'raw', routes: true})
       })
     },
     update () {
