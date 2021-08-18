@@ -32,7 +32,7 @@ sensor:
 
 ### Frontend setup (manual)
 
-Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.6.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
+Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.7.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
 
 Enable [Lovelace YAML mode](https://www.home-assistant.io/lovelace/yaml-mode/).
 
@@ -42,7 +42,7 @@ In `configuration.yaml`:
 lovelace:
   mode: yaml
   resources:
-    - url: /local/zigbee2mqtt-networkmap.js?v=0.6.0
+    - url: /local/zigbee2mqtt-networkmap.js?v=0.7.0
       type: module
 
 ```
@@ -102,7 +102,7 @@ change version string in `configuration.yaml`:
 
 ``` yaml
 resources:
-  - url: /local/zigbee2mqtt-networkmap.js?v=0.6.0 # change `v=0.5.0` to `v=0.6.0`
+  - url: /local/zigbee2mqtt-networkmap.js?v=0.7.0 # change `v=0.6.0` to `v=0.7.0`
     type: module
 ```
 
@@ -127,6 +127,10 @@ A: This is probably a Zigbee2mqtt issue, see
 https://github.com/Koenkk/zigbee2mqtt/issues/2436 for discussion.
 
 ## Changelog
+
+#### [0.7.0] - 2021-08-18
+
+* Update for new zigbee2mqtt API added in 1.17.0, thank @marcins
 
 #### [0.6.0] - 2019-12-02
 
