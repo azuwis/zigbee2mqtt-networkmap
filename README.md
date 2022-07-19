@@ -82,18 +82,14 @@ views:
 
 ### Frontend setup (HACS)
 
-When installing the plugin via [HACS](https://community.home-assistant.io/t/custom-component-hacs/121727),  the path that the JS asset must be loaded from will be slighlty different. Your `ui-lovelace.yaml` config will look like this:
+When installing the plugin via [HACS](https://community.home-assistant.io/t/custom-component-hacs/121727), you'll need to add the resource manually.
 
-```
-resources:
-  # Note: the `community_plugin` root and `type` is `module`. Also, no `?v=` query string as HACS
-  #   will make sure that the most recent version is always loaded.
-  - url: /hacsfiles/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js
-    type: module
-
-```
-
-The `views:` setup will be identical to the non HACS install.
+ - Edit your profile (bottom iten in the left menu in the web UI). Enable *Advanced Mode*.
+ - Go to *Settings* -> *Dashboards* and click the three dots in the upper right corner.
+ - Click *Resources*
+ - Click *ADD RESOURCE* in the bottom right
+ - Enter `/hacsfiles/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js` in the URL field  and select *JavaScript Module*. Click *CREATE*.
+ - Go to *HACS* -> *Frontend*. Here you should see the *Zigbee2mqtt networkmap Card* without any error messages.
 
 ## Upgrade
 
