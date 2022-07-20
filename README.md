@@ -82,7 +82,7 @@ views:
 
 ### Frontend setup (HACS)
 
-When installing the plugin via [HACS](https://community.home-assistant.io/t/custom-component-hacs/121727), you'll need to add the resource manually.
+When installing the plugin via [HACS](https://hacs.xyz/), you'll need to add the resource manually.
 
  - Edit your profile (bottom iten in the left menu in the web UI). Enable *Advanced Mode*.
  - Go to *Settings* -> *Dashboards* and click the three dots in the upper right corner.
@@ -110,12 +110,12 @@ Q: How can I customize device names in the map?
 
 A: The names showed in the map are given by Zigbee2mqtt, you need to configure
 Zigbee2mqtt to customize them, see
-https://www.zigbee2mqtt.io/information/configuration.html for the
+https://www.zigbee2mqtt.io/guide/configuration/devices-groups.html#common-device-options for the
 `friendly_name` option.
 
 Additionaly, HomeAssistant will automatically use the same names when MQTT auto
 discovery is enabled, see
-https://www.zigbee2mqtt.io/integration/home_assistant.html
+https://www.zigbee2mqtt.io/guide/usage/integrations/home_assistant.html#mqtt-discovery
 
 Q: Some of my devices are detached.
 
