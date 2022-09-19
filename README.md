@@ -18,16 +18,16 @@ For 0.106 and earlier instruction can be found [here](https://github.com/azuwis/
 
 In `configuration.yaml`:
 ``` yaml
-sensor:
-  - platform: mqtt
-    name: Zigbee2mqtt Networkmap
-    # if you change base_topic of Zigbee2mqtt, change state_topic accordingly
-    state_topic: zigbee2mqtt/bridge/response/networkmap
-    value_template: >-
-      {{ now().strftime('%Y-%m-%d %H:%M:%S') }}
-    # again, if you change base_topic of Zigbee2mqtt, change json_attributes_topic accordingly
-    json_attributes_topic: zigbee2mqtt/bridge/response/networkmap
-    json_attributes_template: "{{ value_json.data.value | tojson }}"
+mqtt:
+  sensor:
+    - name: Zigbee2mqtt Networkmap
+      # if you change base_topic of Zigbee2mqtt, change state_topic accordingly
+      state_topic: zigbee2mqtt/bridge/response/networkmap
+      value_template: >-
+        {{ now().strftime('%Y-%m-%d %H:%M:%S') }}
+      # again, if you change base_topic of Zigbee2mqtt, change json_attributes_topic accordingly
+      json_attributes_topic: zigbee2mqtt/bridge/response/networkmap
+      json_attributes_template: "{{ value_json.data.value | tojson }}"
 ```
 
 ### Frontend setup (manual)
