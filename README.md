@@ -16,7 +16,7 @@ For 0.106 and earlier instruction can be found [here](https://github.com/azuwis/
 
 ### Backend setup
 
-In `configuration.yaml`:
+In `configuration.yaml` of the Home Assistant installation:
 ``` yaml
 mqtt:
   sensor:
