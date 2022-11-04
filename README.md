@@ -91,6 +91,15 @@ When installing the plugin via [HACS](https://hacs.xyz/), you'll need to add the
  - Enter `/hacsfiles/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js` in the URL field  and select *JavaScript Module*. Click *CREATE*.
  - Go to *HACS* -> *Frontend*. Here you should see the *Zigbee2mqtt networkmap Card* without any error messages.
 
+### Card setup
+
+In order to add this card to the dashboard, Use the *Edit Dashboard* on the top right , three-dots menu, add a manual card, and use this configuration:
+```
+type: custom:zigbee2mqtt-networkmap
+entity: sensor.zigbee2mqtt_networkmap
+```
+Make sure to use the same name of the sensor defined under `configuration.yaml`, baseed on the `Zigbee2mqtt Networkmap` name.
+
 ## Upgrade
 
 Replace `<config-directory>/www/zigbee2mqtt-networkmap.js` with new one, and
