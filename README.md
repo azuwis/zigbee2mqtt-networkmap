@@ -30,11 +30,31 @@ mqtt:
       json_attributes_template: "{{ value_json.data.value | tojson }}"
 ```
 
-### Frontend setup (manual)
+### Frontend setup (HACS)
+
+When installing the plugin via [HACS](https://hacs.xyz/), you'll need to add the resource manually.
+
+ - Edit your profile (bottom iten in the left menu in the web UI). Enable *Advanced Mode*.
+ - Go to *Settings* -> *Dashboards* and click the three dots in the upper right corner.
+ - Click *Resources*
+ - Click *ADD RESOURCE* in the bottom right
+ - Enter `/hacsfiles/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js` in the URL field  and select *JavaScript Module*. Click *CREATE*.
+ - Go to *HACS* -> *Frontend*. Here you should see the *Zigbee2mqtt networkmap Card* without any error messages.
+
+### Card setup (Dashboard Web UI)
+
+In order to add this card to the dashboard, Use the *Edit Dashboard* on the top right , three-dots menu, add a manual card, and use this configuration:
+```
+type: custom:zigbee2mqtt-networkmap
+entity: sensor.zigbee2mqtt_networkmap
+```
+Make sure to use the same name of the sensor defined under `configuration.yaml`, baseed on the `Zigbee2mqtt Networkmap` name.
+
+### Frontend setup (YAML mode)
 
 Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.7.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
 
-Enable [Lovelace YAML mode](https://www.home-assistant.io/lovelace/yaml-mode/).
+Enable [Dashboard YAML mode](https://www.home-assistant.io/dashboards/dashboards/#using-yaml-for-the-default-dashboard).
 
 In `configuration.yaml`:
 
@@ -46,6 +66,8 @@ lovelace:
       type: module
 
 ```
+
+### Card setup (YAML mode)
 
 In `ui-lovelace.yaml`:
 
@@ -80,27 +102,7 @@ views:
           }
 ```
 
-### Frontend setup (HACS)
-
-When installing the plugin via [HACS](https://hacs.xyz/), you'll need to add the resource manually.
-
- - Edit your profile (bottom iten in the left menu in the web UI). Enable *Advanced Mode*.
- - Go to *Settings* -> *Dashboards* and click the three dots in the upper right corner.
- - Click *Resources*
- - Click *ADD RESOURCE* in the bottom right
- - Enter `/hacsfiles/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js` in the URL field  and select *JavaScript Module*. Click *CREATE*.
- - Go to *HACS* -> *Frontend*. Here you should see the *Zigbee2mqtt networkmap Card* without any error messages.
-
-### Card setup
-
-In order to add this card to the dashboard, Use the *Edit Dashboard* on the top right , three-dots menu, add a manual card, and use this configuration:
-```
-type: custom:zigbee2mqtt-networkmap
-entity: sensor.zigbee2mqtt_networkmap
-```
-Make sure to use the same name of the sensor defined under `configuration.yaml`, baseed on the `Zigbee2mqtt Networkmap` name.
-
-## Upgrade
+### Upgrade (YAML mode)
 
 Replace `<config-directory>/www/zigbee2mqtt-networkmap.js` with new one, and
 change version string in `configuration.yaml`:
