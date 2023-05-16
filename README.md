@@ -80,6 +80,8 @@ views:
         entity: sensor.zigbee2mqtt_networkmap
         # the following are optional:
         mqtt_base_topic: zigbee2mqtt # if you change base_topic of Zigbee2mqtt, change it accordingly
+        mqtt_topic: zigbee2mqtt/bridge/request/networkmap # or you can specify the full mqtt topic, see https://www.zigbee2mqtt.io/guide/usage/mqtt_topics_and_messages.html#zigbee2mqtt-bridge-request
+        mqtt_payload: { type: 'raw', routes: true }
         force: 3000 # decrease it to get smaller map if you have many devices
         node_size: 16
         font_size: 12
