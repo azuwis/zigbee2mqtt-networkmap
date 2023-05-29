@@ -52,7 +52,7 @@ Make sure to use the same name of the sensor defined under `configuration.yaml`,
 
 ### Frontend setup (YAML mode)
 
-Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.7.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
+Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.8.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
 
 Enable [Dashboard YAML mode](https://www.home-assistant.io/dashboards/dashboards/#using-yaml-for-the-default-dashboard).
 
@@ -62,7 +62,7 @@ In `configuration.yaml`:
 lovelace:
   mode: yaml
   resources:
-    - url: /local/zigbee2mqtt-networkmap.js?v=0.7.0
+    - url: /local/zigbee2mqtt-networkmap.js?v=0.8.0
       type: module
 
 ```
@@ -111,7 +111,7 @@ change version string in `configuration.yaml`:
 
 ``` yaml
 resources:
-  - url: /local/zigbee2mqtt-networkmap.js?v=0.7.0 # change `v=0.6.0` to `v=0.7.0`
+  - url: /local/zigbee2mqtt-networkmap.js?v=0.8.0 # change `v=0.7.0` to `v=0.8.0`
     type: module
 ```
 
@@ -136,6 +136,10 @@ A: This is probably a Zigbee2mqtt issue, see
 https://github.com/Koenkk/zigbee2mqtt/issues/2436 for discussion.
 
 ## Changelog
+
+#### [0.8.0] - 2023-05-29
+
+* Allow config mqtt full topic and payload, see [Backend setup](#backend-setup) and [Issue #45](https://github.com/azuwis/zigbee2mqtt-networkmap/issues/45)
 
 #### [0.7.0] - 2021-08-18
 
