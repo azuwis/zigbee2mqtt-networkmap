@@ -114,7 +114,7 @@ export default {
       const entity = this.config.entity
       if (newHass && entity) {
         const newAttr = newHass.states[entity].attributes
-        var oldAttr = null
+        let oldAttr = null
         if (oldHass) {
           oldAttr = oldHass.states[entity].attributes
         }
