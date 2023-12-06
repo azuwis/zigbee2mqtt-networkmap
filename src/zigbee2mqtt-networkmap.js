@@ -11,6 +11,10 @@ Vue.component('v-style', {
 const Zigbee2mqttNetworkmapWrap = wrap(Vue, Zigbee2mqttNetworkmapVue)
 
 class Zigbee2mqttNetworkmap extends Zigbee2mqttNetworkmapWrap {
+  get hass () {
+    return this._hass
+  }
+
   set hass (hass) {
     this._hass = hass
     const vm = this.vueComponent
