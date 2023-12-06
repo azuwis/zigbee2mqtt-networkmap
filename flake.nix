@@ -24,7 +24,7 @@
           value = "--openssl-legacy-provider";
         }];
         devshell.startup.yarn.text = ''
-          ln -sf ${nodeModules}/node_modules .
+          ${pkgs.rsync}/bin/rsync -rlt --chmod=Du+w --delete ${nodeModules}/node_modules ./
         '';
         packages = with pkgs; [
           yarn
