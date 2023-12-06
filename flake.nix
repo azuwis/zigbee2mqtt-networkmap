@@ -11,7 +11,7 @@
         inherit system;
         overlays = [ devshell.overlay ];
       };
-      nodeModules = pkgs.mkYarnModules rec {
+      nodeModules = pkgs.mkYarnModules {
         pname = "zigbee2mqtt-networkmap-node-modules";
         version = "1.0";
         packageJSON = ./package.json;
@@ -19,10 +19,6 @@
       };
     in {
       devShell = pkgs.devshell.mkShell {
-        env = [{
-          name = "NODE_OPTIONS";
-          value = "--openssl-legacy-provider";
-        }];
         devshell.startup.yarn.text = ''
           ${pkgs.rsync}/bin/rsync -rlt --chmod=Du+w --delete ${nodeModules}/node_modules ./
         '';
