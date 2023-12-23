@@ -87,6 +87,7 @@ views:
         font_size: 12
         link_width: 2
         height: 400 # height of the card
+        show_slider: 'auto' # shows slider 'auto' / true or false 
         # use this css config or use whatever css tech to change look and feel,
         # the same variable can also be used in Home Assistant themes, see https://www.home-assistant.io/components/frontend/#defining-themes
         css: |
