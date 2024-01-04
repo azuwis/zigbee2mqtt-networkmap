@@ -1,4 +1,5 @@
 name: Build
+permissions: {}
 on:
   pull_request:
     paths-ignore:
