@@ -21,7 +21,7 @@ jobs:
     - uses: actions/checkout@v4
     - uses: azuwis/nix-action@main
       with:
-        key: zigbee2mqtt-networkmap-${{ hashFiles('flake.*') }}
+        key: zigbee2mqtt-networkmap-${{ hashFiles('flake.*', 'yarn.lock') }}
         debug: ${{ github.event_name == 'workflow_dispatch' && inputs.debug }}
         credential: ${{ secrets.TTYD_CREDENTIAL }}
     - uses: cachix/cachix-action@v12
