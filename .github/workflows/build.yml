@@ -19,11 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: azuwis/nix-action@main
+    - uses: azuwis/actions/nix@main
       with:
-        key: zigbee2mqtt-networkmap-${{ hashFiles('flake.*', 'yarn.lock') }}
+        key: nix-${{ hashFiles('flake.*', 'yarn.lock') }}
         debug: ${{ github.event_name == 'workflow_dispatch' && inputs.debug }}
-        credential: ${{ secrets.TTYD_CREDENTIAL }}
     - uses: cachix/cachix-action@v12
       with:
         name: azuwis
@@ -36,7 +35,7 @@ jobs:
       with:
         name: zigbee2mqtt-networkmap
         path: ./dist/zigbee2mqtt-networkmap.js
-    - uses: azuwis/nix-action@post
+    - uses: azuwis/actions/nix/post@main
   release:
     if: ${{ startsWith(github.ref, 'refs/tags/') }}
     needs: build
