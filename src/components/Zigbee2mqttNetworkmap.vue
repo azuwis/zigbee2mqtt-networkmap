@@ -26,6 +26,8 @@
       }
       .link:hover, .node:hover {
         stroke: var(--zigbee2mqtt-networkmap-hover-color, #be385d);
+      }
+      .node:hover {
         stroke-width: 5px;
       }
       .link.selected {
@@ -37,9 +39,16 @@
       .link-label, .node-label {
         fill: var(--zigbee2mqtt-networkmap-label-color, #127862);
       }
+      .node-label {
+        stroke: var(--ha-card-background, var(--card-background-color, #fff));
+        stroke-width: 0.5em;
+        paint-order: stroke;
+        stroke-opacity: 0.7;
+        stroke-linejoin: round;
+      }
       .link-label {
-        -webkit-transform: translateY(-.5em);
-        transform: translateY(-.5em);
+        dominant-baseline: text-after-edge;
+        dominant-baseline: ideographic;
         text-anchor: middle;
       }
       #m-end path {
