@@ -5,6 +5,8 @@ on:
     paths-ignore:
     - '**.md'
   push:
+    branches-ignore:
+    - 'dependabot/**'
     paths-ignore:
     - '**.md'
   workflow_dispatch:
