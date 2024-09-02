@@ -12,6 +12,9 @@ updates:
       # vue 3 gives error `Cannot read properties of undefined (reading 'component')`
       - dependency-name: vue
         versions: [ ">=3.0.0" ]
+      # eslint 9 gives error `Unknown options: extensions`
+      - dependency-name: eslint
+        versions: [ ">=9.0.0" ]
     groups:
       major:
         update-types:
