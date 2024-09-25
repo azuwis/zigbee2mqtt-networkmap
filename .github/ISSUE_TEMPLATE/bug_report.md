@@ -14,7 +14,7 @@ A clear and concise description of what the bug is.
 If applicable, add screenshots to help explain your problem.
 
 **Home Assistant version**
-On Home Assistant, go to `Menu` -> `Developer Tools` -> `INFO`
+On Home Assistant, go to `Menu` -> `Settings` -> `About`
 
 **Zigbee2mqtt version**
 Check `zigbee2mqtt/package.json` file, e.g. `"version": "1.5.1"`. Please update
