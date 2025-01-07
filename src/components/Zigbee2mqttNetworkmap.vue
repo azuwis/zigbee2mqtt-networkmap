@@ -121,7 +121,7 @@ export default {
   watch: {
     hass (newHass, oldHass) {
       const entity = this.config.entity
-      if (newHass && entity) {
+      if (newHass && entity && newHass.states[entity]) {
         const newAttr = newHass.states[entity].attributes
         let oldAttr = null
         if (oldHass) {
