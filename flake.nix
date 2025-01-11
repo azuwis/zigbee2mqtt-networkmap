@@ -1,22 +1,32 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  inputs.systems.url = "github:nix-systems/default";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
   inputs.devshell.url = "github:numtide/devshell";
   inputs.devshell.inputs.nixpkgs.follows = "nixpkgs";
-  inputs.devshell.inputs.systems.follows = "systems";
 
-  outputs = inputs@{ ... }:
+  outputs =
+    inputs@{ ... }:
     let
-      eachSystem = inputs.nixpkgs.lib.genAttrs (import inputs.systems);
+      systems = [
+        "aarch64-darwin"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "x86_64-linux"
+      ];
+      eachSystem =
+        f:
+        inputs.nixpkgs.lib.genAttrs systems (
+          system:
+          f rec {
+            inherit system;
+            pkgs = inputs.nixpkgs.legacyPackages.${system};
+            devshell = import inputs.devshell { nixpkgs = pkgs; };
+          }
+        );
     in
     {
-      devShells = eachSystem (system:
+      devShells = eachSystem (
+        { pkgs, devshell, ... }:
         let
-          pkgs = inputs.nixpkgs.legacyPackages.${system};
-          devshell = import inputs.devshell {
-            inherit inputs system;
-            nixpkgs = pkgs;
-          };
           nodeModules = pkgs.mkYarnModules {
             pname = "zigbee2mqtt-networkmap-node-modules";
             version = "1.0";
@@ -33,6 +43,7 @@
               yarn
             ];
           };
-        });
+        }
+      );
     };
 }
