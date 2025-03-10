@@ -15,6 +15,9 @@ updates:
       # eslint 9 gives error `Unknown options: extensions`
       - dependency-name: eslint
         versions: [ ">=9.0.0" ]
+      # [eslint] Cannot read config file: .../zigbee2mqtt-networkmap/node_modules/@vue/eslint-config-standard/index.js
+      - dependency-name: "@vue/eslint-config-standard"
+        versions: [ ">=9.0.0" ]
     groups:
       major:
         update-types:
