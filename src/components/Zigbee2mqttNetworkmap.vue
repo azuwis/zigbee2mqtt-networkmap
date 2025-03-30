@@ -146,17 +146,17 @@ export default {
       link._svgAttrs = { 'marker-end': 'url(#m-end)' }
       return link
     },
-    merge (target, source, tkey, skey, map) {
+    merge (target, source, map) {
       const result = []
       const store = {}
       if (source) {
         source.forEach(e => {
-          const key = skey(e)
-          store[key] = map(e)
+          const r = map(e)
+          store[r.id] = r
         })
       }
       target.forEach((e, i) => {
-        const key = tkey(e)
+        const key = e.id
         if (key in store) {
           for (const k in store[key]) {
             e[k] = store[key][k]
@@ -184,8 +184,6 @@ export default {
       return {
         nodesTrans: {
           source: attr.nodes,
-          tkey: d => d.id,
-          skey: d => d.ieeeAddr,
           map: d => {
             return {
               id: d.ieeeAddr,
@@ -202,8 +200,6 @@ export default {
               nodes.includes(d.target.ieeeAddr)
             }
           ),
-          tkey: d => d.sid + d.tid,
-          skey: d => d.source.ieeeAddr + d.target.ieeeAddr,
           map: d => {
             return {
               id: d.source.ieeeAddr + d.target.ieeeAddr,
@@ -223,8 +219,8 @@ export default {
         return
       }
       const { nodesTrans, linksTrans } = this.transform(attr, this.config)
-      this.nodes = this.merge(this.nodes, nodesTrans.source, nodesTrans.tkey, nodesTrans.skey, nodesTrans.map)
-      this.links = this.merge(this.links, linksTrans.source, linksTrans.tkey, linksTrans.skey, linksTrans.map)
+      this.nodes = this.merge(this.nodes, nodesTrans.source, nodesTrans.map)
+      this.links = this.merge(this.links, linksTrans.source, linksTrans.map)
     }
   },
   mounted () {
