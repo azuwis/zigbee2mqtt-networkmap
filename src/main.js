@@ -93,6 +93,33 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
             target: {
               ieeeAddr: '01'
             }
+          },
+          {
+            linkquality: 41,
+            source: {
+              ieeeAddr: '07'
+            },
+            target: {
+              ieeeAddr: '09'
+            }
+          },
+          {
+            linkquality: 41,
+            source: {
+              ieeeAddr: '09'
+            },
+            target: {
+              ieeeAddr: '07'
+            }
+          },
+          {
+            linkquality: 41,
+            source: {
+              ieeeAddr: '01'
+            },
+            target: {
+              ieeeAddr: '09'
+            }
           }
         ],
         nodes: [
@@ -132,9 +159,9 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
             type: 'Router'
           },
           {
-            friendlyName: 'door',
+            friendlyName: 'switch',
             ieeeAddr: '09',
-            type: 'EndDevice'
+            type: 'Router'
           },
           {
             friendlyName: 'smoke',
@@ -216,6 +243,33 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
             target: {
               ieeeAddr: '01'
             }
+          },
+          {
+            linkquality: 41,
+            source: {
+              ieeeAddr: '07'
+            },
+            target: {
+              ieeeAddr: '09'
+            }
+          },
+          {
+            linkquality: 41,
+            source: {
+              ieeeAddr: '09'
+            },
+            target: {
+              ieeeAddr: '07'
+            }
+          },
+          {
+            linkquality: 41,
+            source: {
+              ieeeAddr: '01'
+            },
+            target: {
+              ieeeAddr: '09'
+            }
           }
         ],
         nodes: [
@@ -250,9 +304,9 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
             type: 'Router'
           },
           {
-            friendlyName: 'door',
+            friendlyName: 'switch',
             ieeeAddr: '09',
-            type: 'EndDevice'
+            type: 'Router'
           },
           {
             friendlyName: 'smoke',
