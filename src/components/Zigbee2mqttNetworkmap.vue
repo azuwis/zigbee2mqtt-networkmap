@@ -182,7 +182,7 @@ export default {
     },
     transform (attr, config) {
       return {
-        nodesTrans: {
+        nodes: {
           source: attr.nodes,
           map: d => {
             return {
@@ -192,7 +192,7 @@ export default {
             }
           }
         },
-        linksTrans: {
+        links: {
           source: attr.links.filter(
             d => {
               const nodes = attr.nodes.map(d => d.ieeeAddr)
@@ -218,9 +218,9 @@ export default {
         this.refresh()
         return
       }
-      const { nodesTrans, linksTrans } = this.transform(attr, this.config)
-      this.nodes = this.merge(this.nodes, nodesTrans.source, nodesTrans.map)
-      this.links = this.merge(this.links, linksTrans.source, linksTrans.map)
+      const { nodes, links } = this.transform(attr, this.config)
+      this.nodes = this.merge(this.nodes, nodes.source, nodes.map)
+      this.links = this.merge(this.links, links.source, links.map)
     }
   },
   mounted () {
