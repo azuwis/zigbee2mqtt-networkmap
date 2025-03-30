@@ -180,6 +180,41 @@ export default {
         payload: JSON.stringify(payload)
       })
     },
+    transform (attr, config) {
+      return {
+        nodesTrans: {
+          source: attr.nodes,
+          tkey: d => d.id,
+          skey: d => d.ieeeAddr,
+          map: d => {
+            return {
+              id: d.ieeeAddr,
+              name: d.type === 'Coordinator' ? ' ' : d.friendlyName,
+              _cssClass: d.type ? d.type.toLowerCase() : ''
+            }
+          }
+        },
+        linksTrans: {
+          source: attr.links.filter(
+            d => {
+              const nodes = attr.nodes.map(d => d.ieeeAddr)
+              return nodes.includes(d.source.ieeeAddr) &&
+              nodes.includes(d.target.ieeeAddr)
+            }
+          ),
+          tkey: d => d.sid + d.tid,
+          skey: d => d.source.ieeeAddr + d.target.ieeeAddr,
+          map: d => {
+            return {
+              id: d.source.ieeeAddr + d.target.ieeeAddr,
+              sid: d.source.ieeeAddr,
+              tid: d.target.ieeeAddr,
+              name: d.linkquality
+            }
+          }
+        }
+      }
+    },
     update () {
       const attr = this.hass.states[this.config.entity].attributes
       if (!attr.nodes && !this.initialized) {
@@ -187,30 +222,9 @@ export default {
         this.refresh()
         return
       }
-      this.nodes = this.merge(this.nodes, attr.nodes, d => d.id, d => d.ieeeAddr, d => {
-        return {
-          id: d.ieeeAddr,
-          name: d.type === 'Coordinator' ? ' ' : d.friendlyName,
-          _cssClass: d.type ? d.type.toLowerCase() : ''
-        }
-      })
-      const nodes = attr.nodes.map(e => e.ieeeAddr)
-      this.links = this.merge(
-        this.links,
-        attr.links.filter(
-          e => nodes.includes(e.source.ieeeAddr) &&
-             nodes.includes(e.target.ieeeAddr)
-        ),
-        d => d.sid + d.tid,
-        d => d.source.ieeeAddr + d.target.ieeeAddr,
-        d => {
-          return {
-            id: d.source.ieeeAddr + d.target.ieeeAddr,
-            sid: d.source.ieeeAddr,
-            tid: d.target.ieeeAddr,
-            name: d.linkquality
-          }
-        })
+      const { nodesTrans, linksTrans } = this.transform(attr, this.config)
+      this.nodes = this.merge(this.nodes, nodesTrans.source, nodesTrans.tkey, nodesTrans.skey, nodesTrans.map)
+      this.links = this.merge(this.links, linksTrans.source, linksTrans.tkey, linksTrans.skey, linksTrans.map)
     }
   },
   mounted () {
