@@ -14,61 +14,7 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
       {
         links: [
           {
-            linkquality: 17,
-            source: {
-              ieeeAddr: '04'
-            },
-            target: {
-              ieeeAddr: '01'
-            }
-          },
-          {
-            linkquality: 69,
-            source: {
-              ieeeAddr: '05'
-            },
-            target: {
-              ieeeAddr: '01'
-            }
-          },
-          {
-            linkquality: 13,
-            source: {
-              ieeeAddr: '06'
-            },
-            target: {
-              ieeeAddr: '01'
-            }
-          },
-          {
-            linkquality: 35,
-            source: {
-              ieeeAddr: '07'
-            },
-            target: {
-              ieeeAddr: '01'
-            }
-          },
-          {
-            linkquality: 41,
-            source: {
-              ieeeAddr: '01'
-            },
-            target: {
-              ieeeAddr: '07'
-            }
-          },
-          {
-            linkquality: 26,
-            source: {
-              ieeeAddr: '03'
-            },
-            target: {
-              ieeeAddr: '01'
-            }
-          },
-          {
-            linkquality: 47,
+            linkquality: 21,
             source: {
               ieeeAddr: '02'
             },
@@ -77,18 +23,9 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
             }
           },
           {
-            linkquality: 32,
+            linkquality: 31,
             source: {
-              ieeeAddr: '09'
-            },
-            target: {
-              ieeeAddr: '01'
-            }
-          },
-          {
-            linkquality: 70,
-            source: {
-              ieeeAddr: '10'
+              ieeeAddr: '03'
             },
             target: {
               ieeeAddr: '01'
@@ -96,29 +33,92 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
           },
           {
             linkquality: 41,
+            source: {
+              ieeeAddr: '04'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
+          },
+          {
+            linkquality: 51,
+            source: {
+              ieeeAddr: '05'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
+          },
+          {
+            linkquality: 61,
+            source: {
+              ieeeAddr: '06'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
+          },
+          {
+            linkquality: 71,
             source: {
               ieeeAddr: '07'
             },
             target: {
-              ieeeAddr: '09'
+              ieeeAddr: '01'
             }
           },
           {
-            linkquality: 41,
+            linkquality: 81,
+            source: {
+              ieeeAddr: '08'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
+          },
+          {
+            linkquality: 91,
             source: {
               ieeeAddr: '09'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
+          },
+          {
+            linkquality: 17,
+            source: {
+              ieeeAddr: '01'
             },
             target: {
               ieeeAddr: '07'
             }
           },
           {
-            linkquality: 41,
+            linkquality: 18,
             source: {
               ieeeAddr: '01'
             },
             target: {
-              ieeeAddr: '09'
+              ieeeAddr: '08'
+            }
+          },
+          {
+            linkquality: 78,
+            source: {
+              ieeeAddr: '07'
+            },
+            target: {
+              ieeeAddr: '08'
+            }
+          },
+          {
+            linkquality: 87,
+            source: {
+              ieeeAddr: '08'
+            },
+            target: {
+              ieeeAddr: '07'
             }
           }
         ],
@@ -160,12 +160,12 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
           },
           {
             friendlyName: 'switch',
-            ieeeAddr: '09',
+            ieeeAddr: '08',
             type: 'Router'
           },
           {
             friendlyName: 'smoke',
-            ieeeAddr: '10',
+            ieeeAddr: '09',
             type: 'EndDevice'
           }
         ]
@@ -173,7 +173,7 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
       {
         links: [
           {
-            linkquality: 17,
+            linkquality: 41,
             source: {
               ieeeAddr: '04'
             },
@@ -182,7 +182,7 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
             }
           },
           {
-            linkquality: 69,
+            linkquality: 51,
             source: {
               ieeeAddr: '05'
             },
@@ -191,7 +191,7 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
             }
           },
           {
-            linkquality: 13,
+            linkquality: 61,
             source: {
               ieeeAddr: '06'
             },
@@ -200,7 +200,7 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
             }
           },
           {
-            linkquality: 35,
+            linkquality: 71,
             source: {
               ieeeAddr: '07'
             },
@@ -209,7 +209,25 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
             }
           },
           {
-            linkquality: 41,
+            linkquality: 81,
+            source: {
+              ieeeAddr: '08'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
+          },
+          {
+            linkquality: 91,
+            source: {
+              ieeeAddr: '09'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
+          },
+          {
+            linkquality: 17,
             source: {
               ieeeAddr: '01'
             },
@@ -218,7 +236,16 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
             }
           },
           {
-            linkquality: 47,
+            linkquality: 18,
+            source: {
+              ieeeAddr: '01'
+            },
+            target: {
+              ieeeAddr: '08'
+            }
+          },
+          {
+            linkquality: 27,
             source: {
               ieeeAddr: '02'
             },
@@ -227,48 +254,21 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
             }
           },
           {
-            linkquality: 32,
-            source: {
-              ieeeAddr: '09'
-            },
-            target: {
-              ieeeAddr: '01'
-            }
-          },
-          {
-            linkquality: 70,
-            source: {
-              ieeeAddr: '10'
-            },
-            target: {
-              ieeeAddr: '01'
-            }
-          },
-          {
-            linkquality: 41,
+            linkquality: 78,
             source: {
               ieeeAddr: '07'
             },
             target: {
-              ieeeAddr: '09'
+              ieeeAddr: '08'
             }
           },
           {
-            linkquality: 41,
+            linkquality: 87,
             source: {
-              ieeeAddr: '09'
+              ieeeAddr: '08'
             },
             target: {
               ieeeAddr: '07'
-            }
-          },
-          {
-            linkquality: 41,
-            source: {
-              ieeeAddr: '01'
-            },
-            target: {
-              ieeeAddr: '09'
             }
           }
         ],
@@ -305,12 +305,12 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
           },
           {
             friendlyName: 'switch',
-            ieeeAddr: '09',
+            ieeeAddr: '08',
             type: 'Router'
           },
           {
             friendlyName: 'smoke',
-            ieeeAddr: '10',
+            ieeeAddr: '09',
             type: 'EndDevice'
           }
         ]
