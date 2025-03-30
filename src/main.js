@@ -14,49 +14,85 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
       {
         links: [
           {
-            lqi: 17,
-            sourceIeeeAddr: '04',
-            targetIeeeAddr: '01'
+            linkquality: 17,
+            source: {
+              ieeeAddr: '04'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
           },
           {
-            lqi: 69,
-            sourceIeeeAddr: '05',
-            targetIeeeAddr: '01'
+            linkquality: 69,
+            source: {
+              ieeeAddr: '05'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
           },
           {
-            lqi: 13,
-            sourceIeeeAddr: '06',
-            targetIeeeAddr: '01'
+            linkquality: 13,
+            source: {
+              ieeeAddr: '06'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
           },
           {
-            lqi: 35,
-            sourceIeeeAddr: '07',
-            targetIeeeAddr: '01'
+            linkquality: 35,
+            source: {
+              ieeeAddr: '07'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
           },
           {
-            lqi: 41,
-            sourceIeeeAddr: '01',
-            targetIeeeAddr: '07'
+            linkquality: 41,
+            source: {
+              ieeeAddr: '01'
+            },
+            target: {
+              ieeeAddr: '07'
+            }
           },
           {
-            lqi: 26,
-            sourceIeeeAddr: '03',
-            targetIeeeAddr: '01'
+            linkquality: 26,
+            source: {
+              ieeeAddr: '03'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
           },
           {
-            lqi: 47,
-            sourceIeeeAddr: '02',
-            targetIeeeAddr: '01'
+            linkquality: 47,
+            source: {
+              ieeeAddr: '02'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
           },
           {
-            lqi: 32,
-            sourceIeeeAddr: '09',
-            targetIeeeAddr: '01'
+            linkquality: 32,
+            source: {
+              ieeeAddr: '09'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
           },
           {
-            lqi: 70,
-            sourceIeeeAddr: '10',
-            targetIeeeAddr: '01'
+            linkquality: 70,
+            source: {
+              ieeeAddr: '10'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
           }
         ],
         nodes: [
@@ -110,44 +146,76 @@ customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
       {
         links: [
           {
-            lqi: 17,
-            sourceIeeeAddr: '04',
-            targetIeeeAddr: '01'
+            linkquality: 17,
+            source: {
+              ieeeAddr: '04'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
           },
           {
-            lqi: 69,
-            sourceIeeeAddr: '05',
-            targetIeeeAddr: '01'
+            linkquality: 69,
+            source: {
+              ieeeAddr: '05'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
           },
           {
-            lqi: 13,
-            sourceIeeeAddr: '06',
-            targetIeeeAddr: '01'
+            linkquality: 13,
+            source: {
+              ieeeAddr: '06'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
           },
           {
-            lqi: 35,
-            sourceIeeeAddr: '07',
-            targetIeeeAddr: '01'
+            linkquality: 35,
+            source: {
+              ieeeAddr: '07'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
           },
           {
-            lqi: 41,
-            sourceIeeeAddr: '01',
-            targetIeeeAddr: '07'
+            linkquality: 41,
+            source: {
+              ieeeAddr: '01'
+            },
+            target: {
+              ieeeAddr: '07'
+            }
           },
           {
-            lqi: 47,
-            sourceIeeeAddr: '02',
-            targetIeeeAddr: '07'
+            linkquality: 47,
+            source: {
+              ieeeAddr: '02'
+            },
+            target: {
+              ieeeAddr: '07'
+            }
           },
           {
-            lqi: 32,
-            sourceIeeeAddr: '09',
-            targetIeeeAddr: '01'
+            linkquality: 32,
+            source: {
+              ieeeAddr: '09'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
           },
           {
-            lqi: 70,
-            sourceIeeeAddr: '10',
-            targetIeeeAddr: '01'
+            linkquality: 70,
+            source: {
+              ieeeAddr: '10'
+            },
+            target: {
+              ieeeAddr: '01'
+            }
           }
         ],
         nodes: [

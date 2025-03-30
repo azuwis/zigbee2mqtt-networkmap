@@ -198,17 +198,17 @@ export default {
       this.links = this.merge(
         this.links,
         attr.links.filter(
-          e => nodes.includes(e.sourceIeeeAddr) &&
-             nodes.includes(e.targetIeeeAddr)
+          e => nodes.includes(e.source.ieeeAddr) &&
+             nodes.includes(e.target.ieeeAddr)
         ),
         d => d.sid + d.tid,
-        d => d.sourceIeeeAddr + d.targetIeeeAddr,
+        d => d.source.ieeeAddr + d.target.ieeeAddr,
         d => {
           return {
-            id: d.sourceIeeeAddr + d.targetIeeeAddr,
-            sid: d.sourceIeeeAddr,
-            tid: d.targetIeeeAddr,
-            name: d.lqi
+            id: d.source.ieeeAddr + d.target.ieeeAddr,
+            sid: d.source.ieeeAddr,
+            tid: d.target.ieeeAddr,
+            name: d.linkquality
           }
         })
     }
