@@ -4,7 +4,7 @@
 
 ## [Demo](https://azuwis.github.io/zigbee2mqtt-networkmap/)
 
-[![Screenshot](https://azuwis.github.io/zigbee2mqtt-networkmap/screenshot.gif)](https://azuwis.github.io/zigbee2mqtt-networkmap/)
+[![Screenshot](https://github.com/user-attachments/assets/2aef5c48-0d57-484d-84a9-5b00a1bda038)](https://azuwis.github.io/zigbee2mqtt-networkmap/)
 
 ## Home Assistant setup
 
