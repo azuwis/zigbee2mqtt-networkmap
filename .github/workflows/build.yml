@@ -48,7 +48,7 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v5
     - uses: azuwis/actions/release@main
       with:
         files: ./zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js
