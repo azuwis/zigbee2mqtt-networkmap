@@ -37,7 +37,7 @@ jobs:
         name: zigbee2mqtt-networkmap
         path: ./dist/zigbee2mqtt-networkmap.js
     - uses: azuwis/actions/nix/post@main
-    - uses: actions/upload-pages-artifact@v3
+    - uses: actions/upload-pages-artifact@v4
       if: ${{ startsWith(github.ref, 'refs/tags/') }}
       with:
         path: dist/
