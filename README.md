@@ -32,14 +32,14 @@ mqtt:
 
 ### Frontend setup (HACS)
 
-When installing the plugin via [HACS](https://hacs.xyz/), you'll need to add the resource manually.
-
- - Edit your profile (bottom iten in the left menu in the web UI). Enable *Advanced Mode*.
- - Go to *Settings* -> *Dashboards* and click the three dots in the upper right corner.
- - Click *Resources*
- - Click *ADD RESOURCE* in the bottom right
- - Enter `/hacsfiles/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js` in the URL field  and select *JavaScript Module*. Click *CREATE*.
+ - Installing the plugin via [HACS](https://hacs.xyz/)
  - Go to *HACS* -> *Frontend*. Here you should see the *Zigbee2mqtt networkmap Card* without any error messages.
+
+HACS automatically registers required resources, you can check by:
+
+ - Edit your profile (bottom iten in the left menu in the web UI), enable *Advanced Mode*
+ - Go to *Settings* -> *Dashboards* -> three dots menu -> *Resources*
+ - You should see one entry like `/hacsfiles/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js`
 
 ### Card setup (Dashboard Web UI)
 
@@ -54,7 +54,7 @@ Make sure to use the same name of the sensor defined under `configuration.yaml`,
 
 Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.10.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
 
-Enable [Dashboard YAML mode](https://www.home-assistant.io/dashboards/dashboards/#using-yaml-for-the-default-dashboard).
+Enable [Dashboard YAML mode](https://www.home-assistant.io/dashboards/dashboards/#using-yaml-for-the-overview-dashboard).
 
 In `configuration.yaml`:
 
