@@ -1,7 +1,5 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-  inputs.devshell.url = "github:numtide/devshell";
-  inputs.devshell.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
   outputs =
     inputs@{ ... }:
@@ -19,29 +17,25 @@
           f rec {
             inherit system;
             pkgs = inputs.nixpkgs.legacyPackages.${system};
-            devshell = import inputs.devshell { nixpkgs = pkgs; };
           }
         );
     in
     {
       devShells = eachSystem (
-        { pkgs, devshell, ... }:
-        let
-          nodeModules = pkgs.mkYarnModules {
-            pname = "zigbee2mqtt-networkmap-node-modules";
-            version = "1.0";
-            packageJSON = ./package.json;
-            yarnLock = ./yarn.lock;
-          };
-        in
+        { pkgs, ... }:
         {
-          default = devshell.mkShell {
-            devshell.startup.yarn.text = ''
-              ${pkgs.rsync}/bin/rsync -rlt --chmod=Du+w --delete ${nodeModules}/node_modules ./
-            '';
+          default = pkgs.mkShellNoCC {
+            offlineCache = pkgs.fetchYarnDeps {
+              src = builtins.filterSource (path: type: type == "regular" && baseNameOf path == "yarn.lock") ./.;
+              hash = "sha256-uYZndaaGPKF9jK475QJcOTtcpnfOFezhrhwhqX4rLGA=";
+            };
+            nativeBuildInputs = [ pkgs.yarnConfigHook ];
             packages = with pkgs; [
               yarn
             ];
+            shellHook = ''
+              test -e node_modules || yarnConfigHook
+            '';
           };
         }
       );
