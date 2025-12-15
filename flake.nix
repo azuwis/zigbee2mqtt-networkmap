@@ -29,12 +29,13 @@
               src = builtins.filterSource (path: type: type == "regular" && baseNameOf path == "yarn.lock") ./.;
               hash = "sha256-uYZndaaGPKF9jK475QJcOTtcpnfOFezhrhwhqX4rLGA=";
             };
-            nativeBuildInputs = [ pkgs.yarnConfigHook ];
             packages = with pkgs; [
               yarn
+              yarnConfigHook
             ];
             shellHook = ''
-              test -e node_modules || yarnConfigHook
+              # Run yarnConfigHook in subshell, so $HOME will retain
+              test -e node_modules || (yarnConfigHook)
             '';
           };
         }
