@@ -9,6 +9,8 @@ on:
     - 'dependabot/**'
     paths-ignore:
     - '**.md'
+    tags:
+    - v*
   workflow_dispatch:
     inputs:
       debug:
