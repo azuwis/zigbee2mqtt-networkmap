@@ -2,7 +2,7 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
   outputs =
-    inputs@{ ... }:
+    inputs@{ self, ... }:
     let
       systems = [
         "aarch64-darwin"
@@ -25,6 +25,7 @@
         { pkgs, ... }:
         {
           default = pkgs.mkShellNoCC {
+            pname = "devShell";
             offlineCache = pkgs.fetchYarnDeps {
               src = builtins.filterSource (path: type: type == "regular" && baseNameOf path == "yarn.lock") ./.;
               hash = "sha256-uYZndaaGPKF9jK475QJcOTtcpnfOFezhrhwhqX4rLGA=";
@@ -40,5 +41,20 @@
           };
         }
       );
+
+      apps = eachSystem (
+        { pkgs, ... }:
+        {
+          update = {
+            type = "app";
+            program = builtins.toString (
+              pkgs.writers.writeBash "update" ''
+                ${pkgs.nix-update}/bin/nix-update -F default --version=skip --override-filename flake.nix
+              ''
+            );
+          };
+        }
+      );
+      default = self.devShells.x86_64-linux.default;
     };
 }
