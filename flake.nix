@@ -52,7 +52,7 @@
 
               offlineCache = fetchYarnDeps {
                 inherit (finalAttrs) src;
-                hash = "sha256-uYZndaaGPKF9jK475QJcOTtcpnfOFezhrhwhqX4rLGA=";
+                hash = "sha256-Oa63hwVnWNuU53xpV/+yagMnbChAZpstNwl3rggAONc=";
               };
 
               nativeBuildInputs = [
