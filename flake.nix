@@ -21,24 +21,63 @@
         );
     in
     {
-      devShells = eachSystem (
+      packages = eachSystem (
         { pkgs, ... }:
         {
-          default = pkgs.mkShellNoCC {
-            pname = "devShell";
-            offlineCache = pkgs.fetchYarnDeps {
-              src = builtins.filterSource (path: type: type == "regular" && baseNameOf path == "yarn.lock") ./.;
-              hash = "sha256-uYZndaaGPKF9jK475QJcOTtcpnfOFezhrhwhqX4rLGA=";
-            };
-            packages = with pkgs; [
-              yarn
-              yarnConfigHook
-            ];
-            shellHook = ''
-              # Run yarnConfigHook in subshell, so $HOME will retain
-              test -e node_modules || (yarnConfigHook)
-            '';
-          };
+          default = pkgs.callPackage (
+            {
+              lib,
+              stdenv,
+              fetchYarnDeps,
+              yarnConfigHook,
+              yarnBuildHook,
+              nodejs,
+            }:
+
+            stdenv.mkDerivation (finalAttrs: {
+              pname = "zigbee2mqtt-networkmap";
+              version = "0";
+
+              src =
+                with lib.fileset;
+                toSource {
+                  root = ./.;
+                  fileset = difference ./. (unions [
+                    (maybeMissing ./node_modules)
+                    (maybeMissing ./result)
+                    ./flake.lock
+                    ./flake.nix
+                  ]);
+                };
+
+              offlineCache = fetchYarnDeps {
+                inherit (finalAttrs) src;
+                hash = "sha256-uYZndaaGPKF9jK475QJcOTtcpnfOFezhrhwhqX4rLGA=";
+              };
+
+              nativeBuildInputs = [
+                yarnConfigHook
+                yarnBuildHook
+                nodejs
+              ];
+
+              installPhase = ''
+                runHook preInstall
+
+                mkdir $out
+                cp -v dist/* $out/
+
+                runHook postInstall
+              '';
+
+              dontFixup = true;
+
+              shellHook = ''
+                # Run yarnConfigHook in subshell, so $HOME will retain
+                test -e node_modules || (yarnConfigHook)
+              '';
+            })
+          ) { };
         }
       );
 
@@ -55,6 +94,5 @@
           };
         }
       );
-      default = self.devShells.x86_64-linux.default;
     };
 }
