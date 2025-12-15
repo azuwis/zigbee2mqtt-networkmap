@@ -18,6 +18,8 @@ on:
         default: false
 jobs:
   build:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -28,6 +30,23 @@ jobs:
       with:
         name: azuwis
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+    - name: Update offlineCache hash if needed
+      env:
+        GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+      run: |
+        if [[ "$GITHUB_HEAD_REF" == dependabot/* ]] || \
+           [ "$GITHUB_EVENT_BEFORE" == "0000000000000000000000000000000000000000" ] || \
+           git diff --name-only "${GITHUB_EVENT_BEFORE}..${GITHUB_SHA}" | grep -Fqx yarn.lock; then
+          nix run .#update
+          git diff
+          if [ "$GITHUB_EVENT_NAME" = "push" ] && [ "$GITHUB_REF_NAME" = "master" ] && \
+           git diff --name-only | grep -Fqx flake.nix; then
+            git config --global user.name 'github-actions[bot]'
+            git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'flake: Update offlineCache hash' flake.nix
+            git push
+          fi
+        fi
     - name: Build
       run: |
         nix -L build .#
