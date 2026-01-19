@@ -1,0 +1,1 @@
+{ nixpkgs = { lastModified = 1764983851; lastModifiedDate = "20251206011731"; narHash = "sha256-y7RPKl/jJ/KAP/VKLMghMgXTlvNIJMHKskl8/Uuar7o="; outPath = "/nix/store/mmbrs76ksccdn0bvvqs4plivwh6xlcs5-source"; rev = "d9bc5c7dceb30d8d6fafa10aeb6aa8a48c218454"; revCount = 0; shortRev = "d9bc5c7"; submodules = false; }; }

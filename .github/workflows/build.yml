@@ -42,7 +42,7 @@ jobs:
         if [[ "$GITHUB_HEAD_REF" == dependabot/* ]] || \
            [ "$GITHUB_EVENT_BEFORE" == "0000000000000000000000000000000000000000" ] || \
            git diff --name-only "${GITHUB_EVENT_BEFORE}..${GITHUB_SHA}" | grep -Fqx yarn.lock; then
-          nix run .#update
+          nix run -f . update
           git diff
           if [ "$GITHUB_EVENT_NAME" = "push" ] && [ "$GITHUB_REF_NAME" = "master" ] && \
            git diff --name-only | grep -Fqx flake.nix; then
@@ -54,7 +54,7 @@ jobs:
         fi
     - name: Build
       run: |
-        nix -L build .#
+        nix-build
         test -e ./result/zigbee2mqtt-networkmap.js
     - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
       with:
