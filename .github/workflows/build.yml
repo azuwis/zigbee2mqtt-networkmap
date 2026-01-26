@@ -25,8 +25,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-      with:
-        fetch-depth: 0
     - uses: azuwis/actions/nix@main
       with:
         debug: ${{ github.event_name == 'workflow_dispatch' && inputs.debug }}
@@ -37,18 +35,28 @@ jobs:
         authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
     - name: Update offlineCache hash if needed
       env:
-        GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+        GH_TOKEN: ${{ github.token }}
       run: |
-        if [[ "$GITHUB_HEAD_REF" == dependabot/* ]] || \
-           [ "$GITHUB_EVENT_BEFORE" == "0000000000000000000000000000000000000000" ] || \
-           git diff --name-only "${GITHUB_EVENT_BEFORE}..${GITHUB_SHA}" | grep -Fqx yarn.lock; then
+        FILES=""
+        if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+          FILES=$(gh api "repos/$GITHUB_REPOSITORY/pulls/${{ github.event.pull_request.number }}/files" --jq '.[].filename')
+        elif [ "$GITHUB_EVENT_NAME" = "push" ]; then
+          BEFORE_SHA="${{ github.event.before }}"
+          AFTER_SHA="${{ github.event.after }}"
+          if [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            FILES=$(gh api "repos/$GITHUB_REPOSITORY/commits/$AFTER_SHA" --jq '.files[].filename')
+          else
+            FILES=$(gh api "repos/$GITHUB_REPOSITORY/compare/$BEFORE_SHA...$AFTER_SHA" --jq '.files[].filename')
+          fi
+        fi
+        if echo "$FILES" | grep -Fqx yarn.lock; then
           nix run -f . update
           git diff
           if [ "$GITHUB_EVENT_NAME" = "push" ] && [ "$GITHUB_REF_NAME" = "master" ] && \
-           git diff --name-only | grep -Fqx flake.nix; then
+           git diff --name-only | grep -Fqx default.nix; then
             git config --global user.name 'github-actions[bot]'
             git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git commit -m 'flake: Update offlineCache hash' flake.nix
+            git commit -m 'nix: Update offlineCache hash' default.nix
             git push
           fi
         fi
