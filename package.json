@@ -11,7 +11,7 @@
     "vue": "^2.7.15"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.6",
+    "@babel/core": "^7.29.0",
     "@babel/eslint-parser": "^7.28.6",
     "@material/mwc-button": "^0.27.0",
     "@vue/cli-plugin-eslint": "^5.0.9",
