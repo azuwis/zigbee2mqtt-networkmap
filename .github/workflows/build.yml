@@ -66,7 +66,7 @@ jobs:
         test -e ./result/zigbee2mqtt-networkmap.js
     - uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
       with:
-        name: zigbee2mqtt-networkmap
+        archive: false
         path: ./result/zigbee2mqtt-networkmap.js
     - uses: azuwis/actions/nix/post@main
     - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
@@ -83,7 +83,7 @@ jobs:
     - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8.0.0
     - uses: azuwis/actions/release@main
       with:
-        files: ./zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js
+        files: ./zigbee2mqtt-networkmap.js
   pages:
     if: ${{ startsWith(github.ref, 'refs/tags/') }}
     needs: build
