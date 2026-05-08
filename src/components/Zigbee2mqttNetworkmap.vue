@@ -77,7 +77,7 @@
     </svg>
     <div class="card-actions">
       <div class="flex">
-        <mwc-button @click="refresh">Refresh</mwc-button>
+        <ha-button @click="refresh">Refresh</ha-button>
         <div class="time">{{ state }}</div>
       </div>
     </div>
