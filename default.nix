@@ -56,6 +56,35 @@ let
         # Run yarnConfigHook in subshell, so $HOME will retain
         test -e node_modules || (yarnConfigHook)
       '';
+
+      passthru.yarnlock = finalAttrs.finalPackage.overrideAttrs (old: {
+        nativeBuildInputs = [
+          pkgs.cacert
+          pkgs.nodejs
+          pkgs.writableTmpDirAsHomeHook
+          pkgs.yarn
+        ];
+
+        buildPhase = ''
+          runHook preBuild
+
+          yarn install
+          yarn upgrade
+
+          runHook postBuild
+        '';
+
+        installPhase = ''
+          runHook preInstall
+
+          cp yarn.lock $out
+
+          runHook postInstall
+        '';
+
+        outputHash = "sha256-aAAWljRo+hnr3evVx95Li/OLdpOHKAUHIkybQ7iH0c8=";
+        outputHashAlgo = "sha256";
+      });
     })
   ) { };
 in
@@ -66,5 +95,10 @@ zigbee2mqtt-networkmap
   # nix run -f . update
   update = pkgs.writeShellScriptBin "update" ''
     ${pkgs.nix-update}/bin/nix-update zigbee2mqtt-networkmap --version=skip
+  '';
+  # nix run -f . yarnlock
+  yarnlock = pkgs.writeShellScriptBin "yarnlock" ''
+    ${pkgs.nix-update}/bin/nix-update zigbee2mqtt-networkmap.yarnlock --version=skip
+    cp "$(nix-build --no-out-link --attr zigbee2mqtt-networkmap.yarnlock)" yarn.lock
   '';
 }
