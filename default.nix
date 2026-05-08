@@ -32,7 +32,7 @@ let
 
       offlineCache = fetchYarnDeps {
         inherit (finalAttrs) src;
-        hash = "sha256-a14SWpzNPmV20T9f8JHTCUR8uryY9MXBe/zoNM677mk=";
+        hash = "sha256-hAyo2yu+n05ZgQrGEBC7Vqqc5Sb62R7j4uaX0rdNzK8=";
       };
 
       nativeBuildInputs = [
