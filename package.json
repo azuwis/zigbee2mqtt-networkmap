@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "eslint 'src/**/*.{js,vue}' --fix"
   },
   "dependencies": {
     "vue": "^3.5.0"
@@ -14,12 +14,12 @@
     "@babel/core": "^7.29.0",
     "@babel/eslint-parser": "^7.28.6",
     "@material/mwc-button": "^0.27.0",
-    "@vue/cli-plugin-eslint": "^5.0.9",
     "@vue/cli-service": "^5.0.9",
-    "@vue/eslint-config-standard": "^8.0.1",
-    "eslint": "^8.57.1",
-    "eslint-plugin-vue": "^9.33.0",
+    "@vue/eslint-config-standard": "^9.0.0",
+    "eslint": "^9.10.0",
+    "eslint-plugin-vue": "^10.0.0",
     "lodash.isequal": "^4.5.0",
+    "vue-eslint-parser": "^10.0.0",
     "vue3-d3-network": "^1.0.2"
   }
 }
