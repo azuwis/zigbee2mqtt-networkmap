@@ -87,7 +87,6 @@
 <script>
 import { h } from 'vue'
 import D3Network from 'vue3-d3-network'
-import isEqual from 'lodash.isequal'
 
 const VStyle = {
   render () { return h('style', this.$slots.default()) }
@@ -144,7 +143,7 @@ export default {
         if (newAttr !== oldAttr) {
           this.state = newHass.states[entity].state
         }
-        if (!isEqual(newAttr, oldAttr)) {
+        if (JSON.stringify(newAttr) !== JSON.stringify(oldAttr)) {
           this.update()
         }
       }
