@@ -1,72 +1,72 @@
 <template>
+  <v-style>
+    .net {
+      height: 100%;
+      margin: 0;
+    }
+    .node {
+      stroke: var(--zigbee2mqtt-networkmap-node-color, rgba(18, 120, 98, .7));
+      stroke-width: 3px;
+      -webkit-transition: fill .5s ease;
+      transition: fill .5s ease;
+      fill: var(--zigbee2mqtt-networkmap-node-fill-color, #dcfaf3);
+    }
+    .node.selected {
+      stroke: #caa455;
+    }
+    .node.pinned {
+      stroke: var(--zigbee2mqtt-networkmap-node-pinned-color, rgba(190, 56, 93, .6));
+    }
+    .link {
+      stroke: var(--zigbee2mqtt-networkmap-link-color, rgba(18, 120, 98, .5));
+    }
+    .link, .node {
+      stroke-linecap: round;
+    }
+    .link:hover, .node:hover {
+      stroke: var(--zigbee2mqtt-networkmap-hover-color, #be385d);
+    }
+    .node:hover {
+      stroke-width: 5px;
+    }
+    .link.selected {
+      stroke: var(--zigbee2mqtt-networkmap-link-selected-color, rgba(202, 164, 85, .6));
+    }
+    .curve {
+      fill: none;
+    }
+    .link-label, .node-label {
+      fill: var(--zigbee2mqtt-networkmap-label-color, #127862);
+    }
+    .node-label {
+      stroke: var(--ha-card-background, var(--card-background-color, #fff));
+      stroke-width: 0.5em;
+      paint-order: stroke;
+      stroke-opacity: 0.7;
+      stroke-linejoin: round;
+    }
+    .link-label {
+      dominant-baseline: text-after-edge;
+      dominant-baseline: ideographic;
+      text-anchor: middle;
+    }
+    #m-end path {
+      fill: var(--zigbee2mqtt-networkmap-arrow-color, rgba(18, 120, 98, 0.7));
+    }
+    .node.coordinator {
+      stroke: var(--zigbee2mqtt-networkmap-node-coordinator-color, rgba(224, 78, 93, .7));
+    }
+    .node.router {
+      stroke: var(--zigbee2mqtt-networkmap-node-router-color, rgba(0, 165, 255, .7));
+    }
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    {{ css }}
+  </v-style>
   <ha-card>
-    <v-style>
-      .net {
-        height: 100%;
-        margin: 0;
-      }
-      .node {
-        stroke: var(--zigbee2mqtt-networkmap-node-color, rgba(18, 120, 98, .7));
-        stroke-width: 3px;
-        -webkit-transition: fill .5s ease;
-        transition: fill .5s ease;
-        fill: var(--zigbee2mqtt-networkmap-node-fill-color, #dcfaf3);
-      }
-      .node.selected {
-        stroke: #caa455;
-      }
-      .node.pinned {
-        stroke: var(--zigbee2mqtt-networkmap-node-pinned-color, rgba(190, 56, 93, .6));
-      }
-      .link {
-        stroke: var(--zigbee2mqtt-networkmap-link-color, rgba(18, 120, 98, .5));
-      }
-      .link, .node {
-        stroke-linecap: round;
-      }
-      .link:hover, .node:hover {
-        stroke: var(--zigbee2mqtt-networkmap-hover-color, #be385d);
-      }
-      .node:hover {
-        stroke-width: 5px;
-      }
-      .link.selected {
-        stroke: var(--zigbee2mqtt-networkmap-link-selected-color, rgba(202, 164, 85, .6));
-      }
-      .curve {
-        fill: none;
-      }
-      .link-label, .node-label {
-        fill: var(--zigbee2mqtt-networkmap-label-color, #127862);
-      }
-      .node-label {
-        stroke: var(--ha-card-background, var(--card-background-color, #fff));
-        stroke-width: 0.5em;
-        paint-order: stroke;
-        stroke-opacity: 0.7;
-        stroke-linejoin: round;
-      }
-      .link-label {
-        dominant-baseline: text-after-edge;
-        dominant-baseline: ideographic;
-        text-anchor: middle;
-      }
-      #m-end path {
-        fill: var(--zigbee2mqtt-networkmap-arrow-color, rgba(18, 120, 98, 0.7));
-      }
-      .node.coordinator {
-        stroke: var(--zigbee2mqtt-networkmap-node-coordinator-color, rgba(224, 78, 93, .7));
-      }
-      .node.router {
-        stroke: var(--zigbee2mqtt-networkmap-node-router-color, rgba(0, 165, 255, .7));
-      }
-      .flex {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      {{ css }}
-    </v-style>
     <d3-network :net-nodes="nodes" :net-links="links" :options="options" :link-cb="link_cb" ref="net" />
     <svg width="0" height="0">
       <defs>
@@ -85,18 +85,32 @@
 </template>
 
 <script>
-import D3Network from 'vue-d3-network'
+import { h } from 'vue'
+import D3Network from 'vue3-d3-network'
 import isEqual from 'lodash.isequal'
+
+const VStyle = {
+  render () { return h('style', this.$slots.default()) }
+}
 
 export default {
   components: {
-    D3Network
+    D3Network,
+    VStyle
+  },
+  props: {
+    hass: {
+      type: Object,
+      default: null
+    },
+    config: {
+      type: Object,
+      default: () => ({})
+    }
   },
   data () {
     return {
       initialized: false,
-      config: {},
-      hass: null,
       nodes: [],
       links: [],
       state: ''
