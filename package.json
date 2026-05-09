@@ -15,7 +15,7 @@
     "@babel/eslint-parser": "^7.28.6",
     "@vue/cli-service": "^5.0.9",
     "@vue/eslint-config-standard": "^9.0.0",
-    "eslint": "^9.10.0",
+    "eslint": "^10.3.0",
     "eslint-plugin-vue": "^10.0.0",
     "lit-element": "^4.0.0",
     "vue-eslint-parser": "^10.0.0",
