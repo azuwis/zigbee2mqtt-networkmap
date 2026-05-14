@@ -1,3 +1,4 @@
+import './zigbee2mqtt-networkmap'
 import './ha-button'
 import './ha-card'
 customElements.whenDefined('zigbee2mqtt-networkmap').then(() => {
