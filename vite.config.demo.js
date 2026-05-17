@@ -17,8 +17,6 @@ export default defineConfig({
         paths: (id) => '../zigbee2mqtt-networkmap.js'
       }
     },
-    minify: 'esbuild',
-    target: 'es2020',
     modulePreload: false,
     sourcemap: false,
     cssCodeSplit: false,

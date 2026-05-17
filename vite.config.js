@@ -15,11 +15,9 @@ export default defineConfig(({ command }) => {
           input: resolve(__dirname, 'src/zigbee2mqtt-networkmap.js'),
           output: {
             entryFileNames: 'zigbee2mqtt-networkmap.js',
-            inlineDynamicImports: true
+            codeSplitting: false
           }
         },
-        minify: 'esbuild',
-        target: 'es2020',
         modulePreload: false,
         sourcemap: false,
         cssCodeSplit: false,
