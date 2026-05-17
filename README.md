@@ -37,7 +37,7 @@ mqtt:
 
 HACS automatically registers required resources, you can check by:
 
- - Edit your profile (bottom iten in the left menu in the web UI), enable *Advanced Mode*
+ - Edit your profile (bottom item in the left menu in the web UI), enable *Advanced Mode*
  - Go to *Settings* -> *Dashboards* -> three dots menu -> *Resources*
  - You should see one entry like `/hacsfiles/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js`
 
@@ -48,7 +48,7 @@ In order to add this card to the dashboard, Use the *Edit Dashboard* on the top 
 type: custom:zigbee2mqtt-networkmap
 entity: sensor.zigbee2mqtt_networkmap
 ```
-Make sure to use the same name of the sensor defined under `configuration.yaml`, baseed on the `Zigbee2mqtt Networkmap` name.
+Make sure to use the same name of the sensor defined under `configuration.yaml`, based on the `Zigbee2mqtt Networkmap` name.
 
 ### Frontend setup (YAML mode)
 
@@ -186,7 +186,7 @@ https://github.com/Koenkk/zigbee2mqtt/issues/2436 for discussion.
 ## Development
 
 Install [nodejs](https://nodejs.org/) and [yarn](https://yarnpkg.com/), clone the
-repo and install dependances:
+repo and install dependencies:
 
 ``` bash
 git clone https://github.com/azuwis/zigbee2mqtt-networkmap.git
