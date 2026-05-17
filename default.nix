@@ -32,7 +32,7 @@ let
 
       offlineCache = fetchYarnDeps {
         inherit (finalAttrs) src;
-        hash = "sha256-oRF+sK5HMgcqAoXAAxBk1yT0PUus7KkWiyGQ1LRPSis=";
+        hash = "sha256-KeIhOIAl+t6j8Pzc8zaAsrpmioGTWwdGAoDORlurXaI=";
       };
 
       postPatch = ''
@@ -86,7 +86,7 @@ let
           runHook postInstall
         '';
 
-        outputHash = "sha256-s7bIjblSxiz0qlwSJ1uoTgaApSwgP1/QRZiOo5a3AjY=";
+        outputHash = "sha256-0vM+CguJsrnftkzocgSkfiZBloUsJFoMfy6oguo7MPg=";
         outputHashAlgo = "sha256";
       });
     })
