@@ -62,6 +62,9 @@ let
       '';
 
       passthru.yarnlock = finalAttrs.finalPackage.overrideAttrs (old: {
+        # Avoid nix-update trying to update zigbee2mqtt-networkmap.yarnlock.offlineCache
+        offlineCache = null;
+
         nativeBuildInputs = [
           pkgs.cacert
           pkgs.nodejs
