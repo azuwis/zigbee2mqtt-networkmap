@@ -14,7 +14,7 @@ export default defineConfig({
       input: resolve(__dirname, 'index.html'),
       external: (id) => id.endsWith('/src/zigbee2mqtt-networkmap.js'),
       output: {
-        paths: (id) => '../zigbee2mqtt-networkmap.js'
+        paths: (id) => './zigbee2mqtt-networkmap.js'
       }
     },
     modulePreload: false,
