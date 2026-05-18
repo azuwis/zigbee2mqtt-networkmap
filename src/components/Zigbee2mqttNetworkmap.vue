@@ -119,6 +119,7 @@ export default {
     options () {
       const config = this.config
       return {
+        size: { h: (config && config.height) || 400 },
         fontSize: config.font_size || 12,
         force: config.force || 3000,
         linkLabels: true,
@@ -146,11 +147,6 @@ export default {
         if (JSON.stringify(newAttr) !== JSON.stringify(oldAttr)) {
           this.update()
         }
-      }
-    },
-    config (newConfig, oldConfig) {
-      if (newConfig) {
-        this.$refs.net.size.h = newConfig.height || 400
       }
     }
   },
