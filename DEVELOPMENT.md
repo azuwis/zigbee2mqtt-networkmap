@@ -24,7 +24,7 @@ yarn lint     # ESLint 10 flat config (eslint.config.js) with auto-fix (plugin:v
 - CSS is written inline in the template between `<v-style>` tags, with `{{ css }}` interpolation for user-provided CSS from `config.css`
 - Renders `<d3-network>` from `vue3-d3-network` for the force-directed graph
 - `hass` and `config` are declared as **props** (not data) — `defineCustomElement` automatically creates property accessors so that Home Assistant's `element.hass = ...` and `element.setConfig(...)` trigger Vue reactivity
-- `hass` watcher: on HA state changes, calls `transform()` + `merge()` to update nodes/links while preserving existing positions
+- `hass` watcher (immediate: true): fires on component creation and HA state changes, calls `transform()` + `merge()` to update nodes/links while preserving existing positions. `immediate: true` is critical — without it the watcher won't fire when `defineCustomElement` re-creates the Vue app on DOM reconnection (e.g. tab switch)
 - `refresh()`: publishes an MQTT message (`zigbee2mqtt/bridge/request/networkmap`) to request a fresh network map
 - `merge(target, source, map)`: merges new data into existing nodes/links, preserving position but updating attributes like names and link quality. Uses `JSON.stringify` for deep comparison in the watcher
 - Config options: `entity`, `mqtt_base_topic`, `mqtt_topic`, `mqtt_payload`, `force`, `node_size`, `font_size`, `link_width`, `height`, `css`
