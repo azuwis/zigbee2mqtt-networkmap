@@ -133,19 +133,22 @@ export default {
     }
   },
   watch: {
-    hass (newHass, oldHass) {
-      const entity = this.config.entity
-      if (newHass && entity && newHass.states[entity]) {
-        const newAttr = newHass.states[entity].attributes
-        let oldAttr = null
-        if (oldHass) {
-          oldAttr = oldHass.states[entity].attributes
-        }
-        if (newAttr !== oldAttr) {
-          this.state = newHass.states[entity].state
-        }
-        if (JSON.stringify(newAttr) !== JSON.stringify(oldAttr)) {
-          this.update()
+    hass: {
+      immediate: true,
+      handler (newHass, oldHass) {
+        const entity = this.config.entity
+        if (newHass && entity && newHass.states[entity]) {
+          const newAttr = newHass.states[entity].attributes
+          let oldAttr = null
+          if (oldHass) {
+            oldAttr = oldHass.states[entity].attributes
+          }
+          if (newAttr !== oldAttr) {
+            this.state = newHass.states[entity].state
+          }
+          if (JSON.stringify(newAttr) !== JSON.stringify(oldAttr)) {
+            this.update()
+          }
         }
       }
     }
