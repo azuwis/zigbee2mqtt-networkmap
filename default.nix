@@ -75,8 +75,7 @@ let
         buildPhase = ''
           runHook preBuild
 
-          yarn install
-          yarn upgrade
+          yarn upgrade --latest
 
           runHook postBuild
         '';
@@ -84,13 +83,15 @@ let
         installPhase = ''
           runHook preInstall
 
-          cp yarn.lock $out
+          mkdir $out
+          cp package.json yarn.lock $out/
 
           runHook postInstall
         '';
 
-        outputHash = "sha256-0vM+CguJsrnftkzocgSkfiZBloUsJFoMfy6oguo7MPg=";
+        outputHash = "sha256-3iQYbr/DwalNdjYcB5jt3toZmdfqBtTU4RNtTrmb3Zs=";
         outputHashAlgo = "sha256";
+        outputHashMode = "recursive";
       });
     })
   ) { };
@@ -106,6 +107,6 @@ zigbee2mqtt-networkmap
   # nix run -f . yarnlock
   yarnlock = pkgs.writeShellScriptBin "yarnlock" ''
     ${pkgs.nix-update}/bin/nix-update zigbee2mqtt-networkmap.yarnlock --version=skip
-    cp "$(nix-build --no-out-link --attr zigbee2mqtt-networkmap.yarnlock)" yarn.lock
+    cp "$(nix-build --no-out-link --attr zigbee2mqtt-networkmap.yarnlock)"/* .
   '';
 }
