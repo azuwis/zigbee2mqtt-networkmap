@@ -70,7 +70,7 @@
     {{ css }}
   </v-style>
   <ha-card>
-    <d3-network :net-nodes="nodes" :net-links="links" :options="options" :node-cb="node_cb" :link-cb="link_cb" @click="onSvgClick" @node-click="onNodeClick" ref="net" />
+    <d3-network :net-nodes="nodes" :net-links="links" :options="options" :node-cb="node_cb" :link-cb="link_cb" @click="onSvgClick" @node-click="onNodeClick" @pointerdown="onPointerDown" @pointermove="onPointerMove" ref="net" />
     <svg width="0" height="0">
       <defs>
         <marker id="m-end" markerWidth="10" markerHeight="10" refX="12" refY="2" orient="auto" markerUnits="strokeWidth" >
@@ -116,7 +116,8 @@ export default {
       selectedNodeId: null,
       nodes: [],
       links: [],
-      state: ''
+      state: '',
+      _mouseMoved: false
     }
   },
   computed: {
@@ -167,6 +168,7 @@ export default {
       return link
     },
     onNodeClick (event, node) {
+      if (this._mouseMoved) return
       this.selectedNodeId = this.selectedNodeId === node.id ? null : node.id
       this.applyHighlight()
     },
@@ -174,6 +176,19 @@ export default {
       if (!event.target.closest('.node') && !event.target.closest('.link')) {
         this.selectedNodeId = null
         this.applyHighlight()
+      }
+    },
+    onPointerDown (event) {
+      this._mouseMoved = false
+      this._pointerStartX = event.clientX
+      this._pointerStartY = event.clientY
+    },
+    onPointerMove (event) {
+      if (this._mouseMoved) return
+      if (event.pointerType === 'touch' || event.buttons > 0) {
+        const dx = event.clientX - this._pointerStartX
+        const dy = event.clientY - this._pointerStartY
+        if (dx * dx + dy * dy > 25) this._mouseMoved = true
       }
     },
     applyHighlight () {
