@@ -1,5 +1,7 @@
 <template>
   <v-style>
+    <!-- v-style outside <ha-card> so styles land in defineCustomElement's shadow root
+         instead of being slotted into ha-card's own Shadow DOM -->
     .net {
       height: 100%;
       margin: 0;
@@ -139,6 +141,8 @@ export default {
   },
   watch: {
     hass: {
+      // immediate: true is critical. Without it the watcher won't fire when
+      // defineCustomElement re-creates the Vue app on DOM reconnection (e.g. tab switch)
       immediate: true,
       handler (newHass, oldHass) {
         const entity = this.config.entity
@@ -179,6 +183,8 @@ export default {
       }
     },
     onPointerDown (event) {
+      // Track pointer movement to distinguish drag from click. d3-network's
+      // mousedown.preventDefault doesn't reliably suppress click after drag
       this._mouseMoved = false
       this._pointerStartX = event.clientX
       this._pointerStartY = event.clientY
@@ -188,6 +194,7 @@ export default {
       if (event.pointerType === 'touch' || event.buttons > 0) {
         const dx = event.clientX - this._pointerStartX
         const dy = event.clientY - this._pointerStartY
+        // 5px threshold: sub-pixel jitter still registers as click
         if (dx * dx + dy * dy > 25) this._mouseMoved = true
       }
     },
@@ -198,6 +205,7 @@ export default {
       if (this.selectedNodeId) {
         const connectedNodes = new Set()
         const connectedLinks = new Set()
+        // include selected node itself in case it has no links; otherwise it would dim too
         connectedNodes.add(this.selectedNodeId)
         this.links.forEach(link => {
           if (link.sid === this.selectedNodeId || link.tid === this.selectedNodeId) {
@@ -223,6 +231,8 @@ export default {
         svg.querySelectorAll('.node,.link,.node-label,.link-label').forEach(el => el.classList.remove('dimmed'))
       }
     },
+    // Merge new data into existing items, preserving object references so that
+    // d3-force node positions (x, y, fx, fy) survive across data refreshes
     merge (target, source, map) {
       const result = []
       const store = {}
@@ -235,6 +245,7 @@ export default {
       target.forEach((e, i) => {
         const key = e.id
         if (key in store) {
+          // existing item: copy new properties in place, keep reference
           for (const k in store[key]) {
             e[k] = store[key][k]
           }
@@ -264,12 +275,16 @@ export default {
           map: d => {
             return {
               id: d.ieeeAddr,
+              // Coordinator has no friendlyName; use ' ' not ''. vue3-d3-network
+              // falls back to "node <id>" for empty strings
               name: d.type === 'Coordinator' ? ' ' : d.friendlyName,
               _cssClass: d.type ? d.type.toLowerCase() : ''
             }
           }
         },
         links: {
+          // Filter out links whose endpoints are missing from the nodes array.
+          // Zigbee2MQTT can return inconsistent data; d3-force crashes on dangling refs.
           source: attr.links.filter(
             d => {
               const nodes = attr.nodes.map(d => d.ieeeAddr)
@@ -290,6 +305,7 @@ export default {
     },
     update () {
       const attr = this.hass.states[this.config.entity].attributes
+      // First load with no data: auto-trigger a networkmap refresh via MQTT
       if (!attr.nodes && !this.initialized) {
         this.initialized = true
         this.refresh()
@@ -299,12 +315,17 @@ export default {
       this.nodes = this.merge(this.nodes, nodes.source, nodes.map)
       this.links = this.merge(this.links, links.source, links.map)
       if (this.selectedNodeId && !this.nodes.find(n => n.id === this.selectedNodeId)) {
+        // selected node no longer exists after data refresh, clear selection
         this.selectedNodeId = null
       }
+      // d3-network re-renders SVG on data change, which wipes dimmed classes.
+      // Reapply after DOM update.
       this.$nextTick(() => this.applyHighlight())
     }
   },
   mounted () {
+    // Workaround for Firefox: SVG width may not be computed yet at mount time,
+    // causing an empty map. Delay onResize to let layout settle.
     setTimeout(() => {
       this.$refs.net.onResize()
     }, 100)
