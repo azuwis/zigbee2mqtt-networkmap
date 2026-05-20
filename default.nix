@@ -32,7 +32,7 @@ let
 
       offlineCache = fetchYarnDeps {
         inherit (finalAttrs) src;
-        hash = "sha256-KeIhOIAl+t6j8Pzc8zaAsrpmioGTWwdGAoDORlurXaI=";
+        hash = "sha256-juql9gJX3NPOR0AVXejHC0XmRWwdtemMUCDS3iKM+wA=";
       };
 
       postPatch = ''
