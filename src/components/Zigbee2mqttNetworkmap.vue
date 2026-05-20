@@ -32,6 +32,9 @@
     .link.selected {
       stroke: var(--zigbee2mqtt-networkmap-link-selected-color, rgba(202, 164, 85, .6));
     }
+    .node.dimmed, .link.dimmed, .node-label.dimmed, .link-label.dimmed {
+      opacity: 0.15;
+    }
     .curve {
       fill: none;
     }
@@ -67,7 +70,7 @@
     {{ css }}
   </v-style>
   <ha-card>
-    <d3-network :net-nodes="nodes" :net-links="links" :options="options" :link-cb="link_cb" ref="net" />
+    <d3-network :net-nodes="nodes" :net-links="links" :options="options" :node-cb="node_cb" :link-cb="link_cb" @click="onSvgClick" @node-click="onNodeClick" ref="net" />
     <svg width="0" height="0">
       <defs>
         <marker id="m-end" markerWidth="10" markerHeight="10" refX="12" refY="2" orient="auto" markerUnits="strokeWidth" >
@@ -110,6 +113,7 @@ export default {
   data () {
     return {
       initialized: false,
+      selectedNodeId: null,
       nodes: [],
       links: [],
       state: ''
@@ -154,9 +158,55 @@ export default {
     }
   },
   methods: {
+    node_cb (node) {
+      node._svgAttrs = { 'data-id': node.id }
+      return node
+    },
     link_cb (link) {
-      link._svgAttrs = { 'marker-end': 'url(#m-end)' }
+      link._svgAttrs = { 'data-id': link.id, 'marker-end': 'url(#m-end)' }
       return link
+    },
+    onNodeClick (event, node) {
+      this.selectedNodeId = this.selectedNodeId === node.id ? null : node.id
+      this.applyHighlight()
+    },
+    onSvgClick (event) {
+      if (!event.target.closest('.node') && !event.target.closest('.link')) {
+        this.selectedNodeId = null
+        this.applyHighlight()
+      }
+    },
+    applyHighlight () {
+      const svg = this.$refs.net?.$el?.querySelector('svg')
+      if (!svg) return
+
+      if (this.selectedNodeId) {
+        const connectedNodes = new Set()
+        const connectedLinks = new Set()
+        connectedNodes.add(this.selectedNodeId)
+        this.links.forEach(link => {
+          if (link.sid === this.selectedNodeId || link.tid === this.selectedNodeId) {
+            connectedNodes.add(link.sid)
+            connectedNodes.add(link.tid)
+            connectedLinks.add(link.id)
+          }
+        })
+        svg.querySelectorAll('.node').forEach(el => {
+          el.classList.toggle('dimmed', !connectedNodes.has(el.getAttribute('data-id')))
+        })
+        svg.querySelectorAll('.link').forEach(el => {
+          el.classList.toggle('dimmed', !connectedLinks.has(el.getAttribute('data-id')))
+        })
+        // labels don't support _svgAttrs, rely on v-for DOM order matching this.nodes/this.links
+        svg.querySelectorAll('.node-label').forEach((label, i) => {
+          label.classList.toggle('dimmed', !connectedNodes.has(this.nodes[i]?.id))
+        })
+        svg.querySelectorAll('.link-label').forEach((label, i) => {
+          label.classList.toggle('dimmed', !connectedLinks.has(this.links[i]?.id))
+        })
+      } else {
+        svg.querySelectorAll('.node,.link,.node-label,.link-label').forEach(el => el.classList.remove('dimmed'))
+      }
     },
     merge (target, source, map) {
       const result = []
@@ -233,6 +283,10 @@ export default {
       const { nodes, links } = this.transform(attr, this.config)
       this.nodes = this.merge(this.nodes, nodes.source, nodes.map)
       this.links = this.merge(this.links, links.source, links.map)
+      if (this.selectedNodeId && !this.nodes.find(n => n.id === this.selectedNodeId)) {
+        this.selectedNodeId = null
+      }
+      this.$nextTick(() => this.applyHighlight())
     }
   },
   mounted () {
