@@ -7,7 +7,7 @@ A Home Assistant custom card that renders a Zigbee2MQTT network map as an intera
 ## Commands
 
 ```bash
-yarn serve    # Dev server with HMR at http://localhost:5173 (mock HA state, no real HA needed)
+yarn serve    # Dev server with HMR at http://localhost:8080 (mock HA state, no real HA needed)
 yarn build    # Production build: card bundle + demo page -> dist/
 yarn lint     # ESLint 10 flat config (eslint.config.js) with auto-fix (plugin:vue/vue3-essential + @vue/standard)
 ```
@@ -23,10 +23,15 @@ yarn lint     # ESLint 10 flat config (eslint.config.js) with auto-fix (plugin:v
 - `<v-style>` is a local component that uses `h('style', this.$slots.default())` to render CSS into a `<style>` tag. Placed outside `<ha-card>` to avoid being slotted into `<ha-card>`'s own Shadow DOM — this ensures styles apply correctly within `defineCustomElement`'s shadow root
 - CSS is written inline in the template between `<v-style>` tags, with `{{ css }}` interpolation for user-provided CSS from `config.css`
 - Renders `<d3-network>` from `vue3-d3-network` for the force-directed graph
+- `node_cb(node)` / `link_cb(link)`: stamp `_svgAttrs` with `data-id` on each SVG element so `applyHighlight()` can query them
 - `hass` and `config` are declared as **props** (not data) — `defineCustomElement` automatically creates property accessors so that Home Assistant's `element.hass = ...` and `element.setConfig(...)` trigger Vue reactivity
 - `hass` watcher (immediate: true): fires on component creation and HA state changes, calls `transform()` + `merge()` to update nodes/links while preserving existing positions. `immediate: true` is critical — without it the watcher won't fire when `defineCustomElement` re-creates the Vue app on DOM reconnection (e.g. tab switch)
-- `refresh()`: publishes an MQTT message (`zigbee2mqtt/bridge/request/networkmap`) to request a fresh network map
-- `merge(target, source, map)`: merges new data into existing nodes/links, preserving position but updating attributes like names and link quality. Uses `JSON.stringify` for deep comparison in the watcher
+- `refresh()`: publishes an MQTT message (`zigbee2mqtt/bridge/request/networkmap`) to request a fresh network map. On first load with no cached data (`initialized` flag), `update()` auto-calls `refresh()`
+- `transform(attr, config)`: converts raw HA sensor attributes into node/link arrays. Coordinator nodes get `name: ' '` (a space, not empty — vue3-d3-network falls back to `"node <id>"` for empty strings). Links with dangling endpoints (nodes missing from the nodes array) are filtered out to prevent d3-force errors
+- `merge(target, source, map)`: merges new data into existing nodes/links, preserving object references so d3-force positions (x, y, fx, fy) survive across data refreshes. Uses `JSON.stringify` for deep comparison in the watcher
+- **Node selection / highlight:** clicking a node sets `selectedNodeId`; `applyHighlight()` queries SVG DOM for `.node` / `.link` / `.node-label` / `.link-label` elements and toggles a `dimmed` class (opacity 0.15) on unconnected elements. Node/link matching uses `data-id` attributes stamped via `_svgAttrs`; label matching falls back to `v-for` DOM order. Clicking the SVG background resets the selection. After data refresh, `$nextTick(() => applyHighlight())` reapplies dimming because d3-network re-renders SVG and wipes the classes
+- **Drag vs click distinction:** d3-network's `mousedown.preventDefault` doesn't reliably suppress `click` after a drag, so `onPointerDown` / `onPointerMove` track pointer movement. A 5px threshold (`dx² + dy² > 25`) sets `_mouseMoved`; `onNodeClick` bails early when set
+- `mounted()`: calls `$refs.net.onResize()` in a 100ms `setTimeout` — workaround for Firefox where SVG width may not be computed at mount time
 - Config options: `entity`, `mqtt_base_topic`, `mqtt_topic`, `mqtt_payload`, `force`, `node_size`, `font_size`, `link_width`, `height`, `css`
 
 **Dev-only files (not bundled in the card):**
