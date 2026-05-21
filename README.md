@@ -119,7 +119,7 @@ And then refresh the browser.
 
 ## FAQ
 
-Q: How can I customize device names in the map?
+**Q: How can I customize device names in the map?**
 
 A: The names showed in the map are given by Zigbee2mqtt, you need to configure
 Zigbee2mqtt to customize them, see
@@ -130,7 +130,7 @@ Additionaly, HomeAssistant will automatically use the same names when MQTT auto
 discovery is enabled, see
 https://www.zigbee2mqtt.io/guide/usage/integrations/home_assistant.html#mqtt-discovery
 
-Q: How can I customize the appearance of the map?
+**Q: How can I customize the appearance of the map?**
 
 A: Use the `css` option to override default styles. The default CSS can be found
 at [`src/components/Zigbee2mqttNetworkmap.vue`](src/components/Zigbee2mqttNetworkmap.vue)
@@ -152,7 +152,7 @@ css: |
 The `{{ css }}` interpolation is added at the end of `<v-style>`, so your rules
 take precedence.
 
-Q: Some of my devices are detached.
+**Q: Some of my devices are detached.**
 
 A: This is probably a Zigbee2mqtt issue, see
 https://github.com/Koenkk/zigbee2mqtt/issues/2436 for discussion.
