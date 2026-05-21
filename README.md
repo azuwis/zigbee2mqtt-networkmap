@@ -130,6 +130,28 @@ Additionaly, HomeAssistant will automatically use the same names when MQTT auto
 discovery is enabled, see
 https://www.zigbee2mqtt.io/guide/usage/integrations/home_assistant.html#mqtt-discovery
 
+Q: How can I customize the appearance of the map?
+
+A: Use the `css` option to override default styles. The default CSS can be found
+at [`src/components/Zigbee2mqttNetworkmap.vue`](src/components/Zigbee2mqttNetworkmap.vue)
+(look for the `<v-style>` block). Main CSS classes and variables:
+
+- `.node` / `.link` / `.node-label` / `.link-label` — graph elements
+- `.node.coordinator` / `.node.router` — node type styling
+- `--zigbee2mqtt-networkmap-*` — CSS custom properties for colors (see example above)
+
+For example, to make LQI numbers smaller without affecting node labels:
+
+``` yaml
+css: |
+  .link-label {
+    font-size: 8px;
+  }
+```
+
+The `{{ css }}` interpolation is added at the end of `<v-style>`, so your rules
+take precedence.
+
 Q: Some of my devices are detached.
 
 A: This is probably a Zigbee2mqtt issue, see
