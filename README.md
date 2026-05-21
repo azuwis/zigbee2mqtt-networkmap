@@ -52,7 +52,7 @@ Make sure to use the same name of the sensor defined under `configuration.yaml`,
 
 ### Frontend setup (YAML mode)
 
-Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.12.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
+Download [`zigbee2mqtt-networkmap.js`](https://github.com/azuwis/zigbee2mqtt-networkmap/releases/download/v0.13.0/zigbee2mqtt-networkmap.js) and put it into `<config-directory>/www/` directory.
 
 Enable [Dashboard YAML mode](https://www.home-assistant.io/dashboards/dashboards/#using-yaml-for-the-overview-dashboard).
 
@@ -62,7 +62,7 @@ In `configuration.yaml`:
 lovelace:
   mode: yaml
   resources:
-    - url: /local/zigbee2mqtt-networkmap.js?v=0.12.0
+    - url: /local/zigbee2mqtt-networkmap.js?v=0.13.0
       type: module
 
 ```
@@ -111,7 +111,7 @@ change version string in `configuration.yaml`:
 
 ``` yaml
 resources:
-  - url: /local/zigbee2mqtt-networkmap.js?v=0.12.0 # change `v=x.x.x` to `v=0.12.0`
+  - url: /local/zigbee2mqtt-networkmap.js?v=0.13.0 # change `v=x.x.x` to `v=0.13.0`
     type: module
 ```
 

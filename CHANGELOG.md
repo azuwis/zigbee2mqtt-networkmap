@@ -1,5 +1,9 @@
 # Changelog
 
+#### [0.13.0] - 2026-05-21
+
+* Click node to toggle highlight of connected nodes/links, support multi-select, click background to reset
+
 #### [0.12.0] - 2026-05-19
 
 * Fix map disappearing after tab switch due to Vue 3 watcher not firing on remount
