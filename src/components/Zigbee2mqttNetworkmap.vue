@@ -115,7 +115,7 @@ export default {
   data () {
     return {
       initialized: false,
-      selectedNodeId: null,
+      selectedNodeIds: new Set(),
       nodes: [],
       links: [],
       state: '',
@@ -173,12 +173,16 @@ export default {
     },
     onNodeClick (event, node) {
       if (this._mouseMoved) return
-      this.selectedNodeId = this.selectedNodeId === node.id ? null : node.id
+      if (this.selectedNodeIds.has(node.id)) {
+        this.selectedNodeIds.delete(node.id)
+      } else {
+        this.selectedNodeIds.add(node.id)
+      }
       this.applyHighlight()
     },
     onSvgClick (event) {
       if (!event.target.closest('.node') && !event.target.closest('.link')) {
-        this.selectedNodeId = null
+        this.selectedNodeIds.clear()
         this.applyHighlight()
       }
     },
@@ -202,13 +206,13 @@ export default {
       const svg = this.$refs.net?.$el?.querySelector('svg')
       if (!svg) return
 
-      if (this.selectedNodeId) {
+      if (this.selectedNodeIds.size > 0) {
         const connectedNodes = new Set()
         const connectedLinks = new Set()
-        // include selected node itself in case it has no links; otherwise it would dim too
-        connectedNodes.add(this.selectedNodeId)
+        // include selected nodes themselves in case they have no links; otherwise they would dim too
+        this.selectedNodeIds.forEach(id => connectedNodes.add(id))
         this.links.forEach(link => {
-          if (link.sid === this.selectedNodeId || link.tid === this.selectedNodeId) {
+          if (this.selectedNodeIds.has(link.sid) || this.selectedNodeIds.has(link.tid)) {
             connectedNodes.add(link.sid)
             connectedNodes.add(link.tid)
             connectedLinks.add(link.id)
@@ -314,9 +318,9 @@ export default {
       const { nodes, links } = this.transform(attr, this.config)
       this.nodes = this.merge(this.nodes, nodes.source, nodes.map)
       this.links = this.merge(this.links, links.source, links.map)
-      if (this.selectedNodeId && !this.nodes.find(n => n.id === this.selectedNodeId)) {
-        // selected node no longer exists after data refresh, clear selection
-        this.selectedNodeId = null
+      // selected node no longer exists after data refresh, clear selection
+      for (const id of this.selectedNodeIds) {
+        if (!this.nodes.find(n => n.id === id)) this.selectedNodeIds.delete(id)
       }
       // d3-network re-renders SVG on data change, which wipes dimmed classes.
       // Reapply after DOM update.
