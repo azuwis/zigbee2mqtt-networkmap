@@ -35,10 +35,6 @@ let
         hash = "sha256-4IcHO8P5r6hktgjqQutS0ynAVriDaDSdkXoNSH9tN9g=";
       };
 
-      postPatch = ''
-        echo 'ignore-scripts true' >> .yarnrc
-      '';
-
       nativeBuildInputs = [
         yarnConfigHook
         yarnBuildHook
