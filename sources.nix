@@ -40,6 +40,6 @@ builtins.mapAttrs
   {
     nixpkgs = {
       url = "https://github.com/NixOS/nixpkgs";
-      ref = "nixos-25.11";
+      ref = "nixos-26.05";
     };
   }
