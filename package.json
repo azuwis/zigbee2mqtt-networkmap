@@ -8,17 +8,17 @@
     "lint": "eslint 'src/**/*.{js,vue}' --fix"
   },
   "dependencies": {
-    "vue": "^3.5.35",
+    "vue": "^3.5.38",
     "vue3-d3-network": "^1.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@vitejs/plugin-vue": "^6.0.7",
     "eslint": "^10.4.1",
-    "eslint-plugin-vue": "^10.0.0",
+    "eslint-plugin-vue": "^10.9.2",
     "globals": "^17.6.0",
     "lit-element": "^4.0.0",
     "vite": "^8.0.16",
-    "vue-eslint-parser": "^10.3.0"
+    "vue-eslint-parser": "^10.4.1"
   }
 }
