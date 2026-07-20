@@ -9,7 +9,7 @@ A Home Assistant custom card that renders a Zigbee2MQTT network map as an intera
 ```bash
 yarn serve    # Dev server with HMR at http://localhost:8080 (mock HA state, no real HA needed)
 yarn build    # Production build: card bundle + demo page -> dist/
-yarn lint     # ESLint 10 flat config (eslint.config.js) with auto-fix (plugin:vue/vue3-essential + @vue/standard)
+yarn lint     # ESLint with auto-fix (see eslint.config.js for plugins and rules)
 ```
 
 ## Architecture
@@ -32,7 +32,6 @@ yarn lint     # ESLint 10 flat config (eslint.config.js) with auto-fix (plugin:v
 - **Node selection / highlight:** clicking a node toggles it in `selectedNodeIds` (a Set, supporting multi-select); `applyHighlight()` queries SVG DOM for `.node` / `.link` / `.node-label` / `.link-label` elements and toggles a `dimmed` class (opacity 0.15) on elements not connected to any selected node. Node/link matching uses `data-id` attributes stamped via `_svgAttrs`; label matching falls back to `v-for` DOM order (⚠ fragile: assumes d3-network renders labels in the same order as `this.nodes`/`this.links`. If rendering order diverges, dimming applies to wrong labels). Clicking the SVG background clears all selections. After data refresh, `$nextTick(() => applyHighlight())` reapplies dimming because d3-network re-renders SVG and wipes the classes
 - **Drag vs click distinction:** d3-network's `mousedown.preventDefault` doesn't reliably suppress `click` after a drag, so `onPointerDown` / `onPointerMove` track pointer movement. A 5px threshold (`dx² + dy² > 25`) sets `_mouseMoved`; `onNodeClick` bails early when set
 - `mounted()`: calls `$refs.net.onResize()` in a 100ms `setTimeout` as a workaround for Firefox where SVG width may not be computed at mount time
-- Config options: `entity`, `mqtt_base_topic`, `mqtt_topic`, `mqtt_payload`, `force`, `node_size`, `font_size`, `link_width`, `height`, `css`
 
 **Dev-only files (not bundled in the card):**
 - `src/main.js`: mock HA environment with fake states and a toggle between two network snapshots; loaded by `index.html` in both dev and production demo
@@ -40,7 +39,7 @@ yarn lint     # ESLint 10 flat config (eslint.config.js) with auto-fix (plugin:v
 - `src/ha-button.js`: standalone LitElement replica of `<ha-button>` for the same reason
 
 **Build output:** Two-stage build via `vite.config.js`:
-1. `vite build`: card bundle → `dist/zigbee2mqtt-networkmap.js` (~156K, self-contained: Vue, d3-force, vue3-d3-network). Uses `resolve.alias` to force Vue runtime-only build (avoids ~90K template compiler).
+1. `vite build`: card bundle → `dist/zigbee2mqtt-networkmap.js` (self-contained: Vue, d3-force, vue3-d3-network). Uses `resolve.alias` to force Vue runtime-only build (avoids the template compiler).
 2. `vite build --config vite.config.demo.js`: demo page → `dist/index.html`, externalizes the card import, inlines the demo JS.
 
 No source maps in production. `modulePreload: false`, `codeSplitting: false`.
