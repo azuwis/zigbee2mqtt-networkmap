@@ -21,18 +21,15 @@ on:
 jobs:
   build:
     permissions:
+      actions: read
       contents: write
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - uses: azuwis/actions/nix@main
-      with:
-        debug: ${{ github.event_name == 'workflow_dispatch' && inputs.debug }}
-    - uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
-      continue-on-error: true
-      with:
-        name: azuwis
-        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+    - uses: azuwis/actions/debug@main
+      if: ${{ inputs.debug }}
+    - uses: Mic92/hestia@dfed9ced335d28978ba74e513939a10db1f71025 # v3.1.0
     - name: Update offlineCache hash if needed
       env:
         GH_TOKEN: ${{ github.token }}
@@ -68,7 +65,6 @@ jobs:
       with:
         archive: false
         path: ./result/zigbee2mqtt-networkmap.js
-    - uses: azuwis/actions/nix/post@main
     - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
       if: ${{ startsWith(github.ref, 'refs/tags/') }}
       with:
