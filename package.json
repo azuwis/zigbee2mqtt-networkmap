@@ -8,7 +8,7 @@
     "lint": "eslint 'src/**/*.{js,vue}' --fix"
   },
   "dependencies": {
-    "vue": "^3.5.45",
+    "vue": "^3.5.46",
     "vue3-d3-network": "^1.0.2"
   },
   "devDependencies": {
